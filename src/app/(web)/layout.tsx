@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
-import { ThemeContextProvider } from "@/context/themeContext";
+import { ThemeContextProvider } from "../../context/themeContext";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" >
+    <html lang="en">
       <body className={poppins.className}>
         <ThemeContextProvider>
           <main className="font-normal">

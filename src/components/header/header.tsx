@@ -1,15 +1,16 @@
 "use client";
 
-import { useThemeContext } from "@/context/themeContext";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
+import { useThemeContext } from "../../context/themeContext";
+import React from "react";
 
 function Header() {
   const { darkTheme, setDarkTheme } = useThemeContext();
 
   return (
-    <header className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between ">
+    <header className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between dark:bg-black dark:text-white">
       <div className="flex items-center w-full md:2/3">
         <Link href="/" className="font-black text-tertiary-dark">
           Eleven Hotel

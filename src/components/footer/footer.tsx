@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 import { BiMessageDetail } from "react-icons/bi";
 import { BsFillSendFill, BsTelephoneOutbound } from "react-icons/bs";
 
@@ -45,7 +46,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      
+
       <div className="bg-tertiary-light h-10 md:h-[70px] mt-16 w-full bottom-0 left-0"></div>
     </footer>
   );

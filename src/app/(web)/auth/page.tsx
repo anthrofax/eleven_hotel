@@ -1,5 +1,6 @@
 'use client'
 
+import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
