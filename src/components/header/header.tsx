@@ -5,9 +5,15 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { useThemeContext } from "../../context/themeContext";
 import React from "react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 function Header() {
   const { darkTheme, setDarkTheme } = useThemeContext();
+
+  const { data: session } = useSession();
+
+  console.log(session);
 
   return (
     <header className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between dark:bg-black dark:text-white">
@@ -18,9 +24,22 @@ function Header() {
 
         <ul className="flex items-center ml-5">
           <li className="flex items-center">
-            <Link href="/auth">
-              <FaUserCircle className="cursor-pointer" />
-            </Link>
+            {session ? (
+              <Link href={`users/${session.user.id}`}>
+                <div className="w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
+                  <Image
+                    src={session.user.image as string}
+                    alt={session.user.name as string}
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              </Link>
+            ) : (
+              <Link href="/auth">
+                <FaUserCircle className="cursor-pointer" />
+              </Link>
+            )}
           </li>
           <li className="ml-2">
             {darkTheme ? (
