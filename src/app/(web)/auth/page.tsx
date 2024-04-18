@@ -1,9 +1,13 @@
-'use client'
+"use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+import { signUp } from "next-auth-sanity/client";
+import toast from "react-hot-toast";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const defaultFormData = {
   email: "",
@@ -13,6 +17,19 @@ const defaultFormData = {
 
 function Auth() {
   const [formData, setFormData] = useState(defaultFormData);
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  console.log(session);
+
+  useEffect(
+    function () {
+      if (!session) return;
+
+      router.push("/");
+    },
+    [router, session]
+  );
 
   const inputStyles =
     "border border-gray-300 sm:text-sm text-black rounded-lg block w-full p-2.5 focus:outline-none";
@@ -23,13 +40,31 @@ function Auth() {
     setFormData({ ...formData, [name]: value });
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function loginHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
-      console.log(formData);
+      await signIn();
+
+      toast.success("Login berhasil dilakukan");
+
+      // router.push("/");
+    } catch (err) {
+      toast.error("Gagal melakukan login");
+    }
+  }
+
+  async function signUpSubmit(event: FormEvent<HTMLFormElement> | undefined) {
+    if (event) event.preventDefault();
+
+    try {
+      // Invoke POST request to api/sanity/signUp route.
+      const user = await signUp(formData);
+
+      if (user) toast.success("Akun anda berhasil didaftarkan.");
     } catch (err) {
       console.log(err);
+      toast.error("Terdapat kesalahan pada pendaftaran akun anda");
     } finally {
       setFormData(defaultFormData);
     }
@@ -44,16 +79,22 @@ function Auth() {
           </h1>
           <p>OR</p>
           <span className="inline-flex items-center">
-            <AiFillGithub className="mr-3 text-4xl cursor-pointer text-black dark:text-white" />{" "}
+            <AiFillGithub
+              onClick={loginHandler}
+              className="mr-3 text-4xl cursor-pointer text-black dark:text-white"
+            />{" "}
             |
-            <FcGoogle className="ml-3 text-4xl cursor-pointer" />
+            <FcGoogle
+              onClick={loginHandler}
+              className="ml-3 text-4xl cursor-pointer"
+            />
           </span>
         </div>
 
         <form
           action=""
           className="space-y-4 md:space-y-6"
-          onSubmit={handleSubmit}
+          onSubmit={signUpSubmit}
         >
           <input
             type="email"
@@ -90,7 +131,9 @@ function Auth() {
             Sign Up
           </button>
 
-          <button className="text-blue-700 underline">Login</button>
+          <button onClick={loginHandler} className="text-blue-700 underline">
+            Login
+          </button>
         </form>
       </div>
     </section>

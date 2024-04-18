@@ -48,7 +48,6 @@ function ThemeContextProvider({ children }: { children: React.ReactNode }) {
 
 function useThemeContext() {
   const context = useContext(ThemeContext);
-  console.log(context)
 
   if (!context) alert("Anda menggunakan context di luar jangkauan");
 
