@@ -29,6 +29,7 @@ function CountUpNumber({
       };
 
       animationFrameId = requestAnimationFrame(updateCount);
+      console.log(animationFrameId)
 
       return () => cancelAnimationFrame(animationFrameId);
     },
@@ -37,7 +38,7 @@ function CountUpNumber({
 
   return (
     <p className="md:font-bold font-medium text-lg xl:text-5xl">
-      {Math.round(count)}
+      {Math.round(count)}+
     </p>
   );
 }

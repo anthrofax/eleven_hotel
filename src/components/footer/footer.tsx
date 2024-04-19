@@ -18,7 +18,7 @@ function Footer() {
             <p>123 Road</p>
             <div className="flex items-center py-4">
               <BsFillSendFill />
-              <p className="ml-2">codewithlari</p>
+              <p className="ml-2">eleven_hotel</p>
             </div>
             <div className="flex items-center ">
               <BsTelephoneOutbound />
@@ -26,7 +26,7 @@ function Footer() {
             </div>
             <div className="flex items-center pt-4">
               <BiMessageDetail />
-              <p className="ml-2">codewithlari</p>
+              <p className="ml-2">elevenhotel</p>
             </div>
           </div>
 
