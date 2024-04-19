@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CountUpNumber from "../CountUpNumber/count-up-number";
 
 function HeroSection() {
   return (
@@ -14,15 +15,15 @@ function HeroSection() {
         <div className="flex justify-between mt-12">
           <div className="flex gap-3 flex-col items-center justify-center">
             <p className="text-xs lg:text-xl text-center">Basic Room </p>
-            <p className="md:font-bold font-medium text-lg xl:text-5xl">+ 20</p>
+            <CountUpNumber duration={3000} endValue={200} />
           </div>
           <div className="flex gap-3 flex-col items-center justify-center">
             <p className="text-xs lg:text-xl text-center">Luxury Room </p>
-            <p className="md:font-bold font-medium text-lg xl:text-5xl">+ 20</p>
+            <CountUpNumber duration={3000} endValue={200} />
           </div>
           <div className="flex gap-3 flex-col items-center justify-center">
             <p className="text-xs lg:text-xl text-center">Suite</p>
-            <p className="md:font-bold font-medium text-lg xl:text-5xl">+ 20</p>
+            <CountUpNumber duration={3000} endValue={200} />
           </div>
         </div>
       </div>
