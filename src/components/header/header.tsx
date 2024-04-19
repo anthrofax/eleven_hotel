@@ -13,8 +13,6 @@ function Header() {
 
   const { data: session } = useSession();
 
-  console.log(session);
-
   return (
     <header className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between dark:bg-black dark:text-white">
       <div className="flex items-center w-full md:2/3">
@@ -28,6 +26,7 @@ function Header() {
               <Link href={`users/${session.user.id}`}>
                 <div className="w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                   <Image
+                    className=" scale-animation"
                     src={session.user.image as string}
                     alt={session.user.name as string}
                     width={40}
