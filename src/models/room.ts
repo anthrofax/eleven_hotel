@@ -35,3 +35,15 @@ export type Room = {
   catatanPelanggan: string;
   type: string;
 };
+
+export type CreateBookingDto = {
+  user: string;
+  kamarHotel: string;
+  tanggalCheckin: string;
+  tanggalCheckout: string;
+  masaInap: number;
+  jumlahOrangDewasa: number;
+  jumlahAnak: number;
+  hargaTotal: number;
+  diskon: number;
+};
