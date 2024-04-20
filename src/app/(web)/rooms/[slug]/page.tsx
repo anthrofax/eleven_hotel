@@ -8,9 +8,16 @@ import { MdOutlineCleaningServices } from "react-icons/md";
 import { LiaFireExtinguisherSolid } from "react-icons/lia";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
+import BookRoomCTA from "@/components/BookRoomCTA/book-room-cta";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
+  const [checkinDate, setCheckinDate] = useState<Date | null>(null);
+  const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
+  const [dewasa, setDewasa] = useState<number>(1);
+  const [jumlahAnak, setJumlahAnak] = useState<number>(0);
 
   const {
     data: room,
@@ -18,7 +25,30 @@ function Page({ params }: { params: { slug: string } }) {
     isLoading,
   } = useSWR("/api/room", getRoom.bind(null, slug));
 
-  console.log(room)
+  function hitungMinimumTanggalCheckout() {
+    if (!checkinDate) return null;
+
+    const nextDay = new Date(checkinDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+
+    return nextDay;
+  }
+
+  function bookingKamar() {
+    if (!checkinDate || !checkoutDate)
+      return toast.error(
+        "Mohon isi tanggal Check-in & Check-out terlebih dahulu"
+      );
+
+    if (checkinDate > checkoutDate)
+      return toast.error("Mohon isi tanggal Check-in yang valid");
+
+    const masaPenginapan = hitungMinimumTanggalCheckout();
+
+    const slugKamar = room?.slug.current;
+
+    // Implement Stripe
+  }
 
   if (error) throw new Error("Cannot fetch data");
   if (typeof room === "undefined" && !isLoading)
@@ -105,11 +135,26 @@ function Page({ params }: { params: { slug: string } }) {
                   {/* Reviews */}
                 </div>
               </div>
-
-              <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto">
-                {/* Book Room CTA */}
-              </div>
             </div>
+          </div>
+
+          <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto">
+            <BookRoomCTA
+              diskon={room.diskon}
+              harga={room.harga}
+              catatanPelanggan={room.catatanPelanggan}
+              checkinDate={checkinDate}
+              setCheckinDate={setCheckinDate}
+              checkoutDate={checkoutDate}
+              setCheckoutDate={setCheckoutDate}
+              hitungMinimumTanggalCheckout={hitungMinimumTanggalCheckout}
+              dewasa={dewasa}
+              jumlahAnak={jumlahAnak}
+              setAdults={setDewasa}
+              setNoOfChildren={setJumlahAnak}
+              isBooked={room.isBooked}
+              bookingKamar={bookingKamar}
+            />
           </div>
         </div>
       </div>

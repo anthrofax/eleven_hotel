@@ -109,10 +109,7 @@ function HotelPhotoGallery(
         </div>
 
         {showModal && (
-          <div
-            className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-90 z-[55]"
-            onClick={closeModal}
-          >
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-90 z-[55]">
             <div className="h-[75vh] w-[320px] md:w-[700px] relative">
               <Image
                 src={photos[currenPhotoIndex].url}
