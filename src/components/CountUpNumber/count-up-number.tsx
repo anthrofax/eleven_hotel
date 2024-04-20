@@ -29,7 +29,6 @@ function CountUpNumber({
       };
 
       animationFrameId = requestAnimationFrame(updateCount);
-      console.log(animationFrameId)
 
       return () => cancelAnimationFrame(animationFrameId);
     },

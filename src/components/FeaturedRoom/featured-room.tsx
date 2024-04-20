@@ -1,4 +1,4 @@
-import { Room } from "@/app/models/room";
+import { Room } from "@/models/room";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,8 +7,6 @@ type Props = {
 };
 
 function FeaturedRoom({ featuredRoom }: Props) {
-  console.log(featuredRoom);
-
   return (
     <section className="flex md:flex-row flex-col px-4 py-10 items-center gap-12 container mx-auto">
       <div className="md:grid gap-8 grid-cols-1">

@@ -11,3 +11,16 @@ export const getFeaturedRoomQuery = groq`*[_type == "kamarHotel" && isFeatured =
     slug,
     coverGambar
 }`;
+
+export const getRoomsQuery = groq`*[_type == "kamarHotel"] {
+    _id, 
+    coverGambar,
+    deskripsi,
+    dimensi,
+    isBooked,
+    isFeatured,
+    nama,
+    harga,
+    slug,
+    type
+}`;
