@@ -24,3 +24,21 @@ export const getRoomsQuery = groq`*[_type == "kamarHotel"] {
     slug,
     type
 }`;
+
+export const getRoom = groq`*[_type == "kamarHotel" && slug.current == $slug][0] {
+    _id,
+    coverGambar,
+    deskripsi,
+    dimensi,
+    diskon,
+    gambar,
+    isBooked,
+    isFeatured,
+    nama,
+    jumlahKasur,
+    fasilitas,
+    harga,
+    slug,
+    catatanPelanggan,
+    type
+}`;
