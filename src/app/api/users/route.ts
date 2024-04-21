@@ -2,7 +2,12 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 import { authOptions } from "@/libs/auth";
-import { getUserData } from "@/libs/apis";
+import {
+  cekApakahUlasanTelahAdaSebelumnya,
+  createReview,
+  getUserData,
+  updateReview,
+} from "@/libs/apis";
 
 export async function GET(req: Request, res: Response) {
   const session = await getServerSession(authOptions);
@@ -19,5 +24,52 @@ export async function GET(req: Request, res: Response) {
     return NextResponse.json(data, { status: 200, statusText: "Successful" });
   } catch (error) {
     return new NextResponse("Unable to fetch", { status: 400 });
+  }
+}
+
+export async function POST(req: Request, res: Response) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return new NextResponse("Authentication Required", { status: 500 });
+  }
+
+  const { roomId, reviewText, ratingValue } = await req.json();
+
+  if (!roomId || !reviewText || !ratingValue) {
+    return new NextResponse("All fields are required", { status: 400 });
+  }
+
+  const userId = session.user.id;
+
+  try {
+    const alreadyExists = await cekApakahUlasanTelahAdaSebelumnya(
+      userId,
+      roomId
+    );
+
+    console.log(alreadyExists);
+
+    let data;
+
+    if (alreadyExists) {
+      data = await updateReview({
+        reviewId: alreadyExists._id,
+        reviewText,
+        ratingPengguna: ratingValue,
+      });
+    } else {
+      data = await createReview({
+        idKamar: roomId,
+        reviewText,
+        userId,
+        ratingPengguna: ratingValue,
+      });
+    }
+
+    return NextResponse.json(data, { status: 200, statusText: "Successful" });
+  } catch (error: any) {
+    console.log("Error Updating", error);
+    return new NextResponse("Unable to create review", { status: 400 });
   }
 }

@@ -5,11 +5,11 @@ import { Dispatch, SetStateAction } from "react";
 function Table({
   bookingDetails,
   setRoomId,
-  // toggleRatingModal,
+  toggleRatingModal,
 }: {
   bookingDetails: Booking[];
   setRoomId: Dispatch<SetStateAction<string | null>>;
-  // toggleRatingModal: () => void;
+  toggleRatingModal: () => void;
 }) {
   const router = useRouter();
 
@@ -50,7 +50,7 @@ function Table({
                 <button
                   onClick={() => {
                     setRoomId(booking.kamarHotel._id);
-                    // toggleRatingModal();
+                    toggleRatingModal();
                   }}
                   className="font-medium text-blue-600 hover:underline"
                 >

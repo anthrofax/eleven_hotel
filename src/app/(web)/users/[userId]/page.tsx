@@ -13,6 +13,9 @@ import { signOut } from "next-auth/react";
 import { useState } from "react";
 import Table from "@/components/Table/table";
 import Chart from "@/components/Chart/chart";
+import RatingModal from "@/components/RatingModal/rating-modal";
+import Backdrop from "@/components/BackDrop/backdrop";
+import toast from "react-hot-toast";
 
 function Page({ params }: { params: any }) {
   const { userId } = params;
@@ -21,11 +24,47 @@ function Page({ params }: { params: any }) {
     "bookings" | "amount" | "ratings"
   >("bookings");
   const [roomId, setRoomId] = useState<string | null>(null);
+  const [isRatingVisible, setIsRatingVisible] = useState(false);
+  const [ratingValue, setRatingValue] = useState<number>(0);
+  const [ratingText, setRatingText] = useState("");
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
-  const fetchUserData = async () => {
+  const toggleRatingModal = () => setIsRatingVisible((prevState) => !prevState);
+
+  async function reviewSubmitHandler() {
+    if (!ratingText.trim().length || !ratingValue) {
+      return toast.error("Mohon isi kolom ulasan terlebih dahulu");
+    }
+
+    if (!roomId) toast.error("Kamar yang anda ulas tidak valid");
+
+    setIsSubmittingReview(true);
+
+    try {
+      const { data } = await axios.post("/api/users", {
+        reviewText: ratingText,
+        ratingValue,
+        roomId,
+      });
+      
+      console.log(data);
+      toast.success("Berhasil memberikan ulasan");
+    } catch (error) {
+      console.log(error);
+      toast.error("Gagal memberikan ulasan");
+    } finally {
+      setRatingText("");
+      setRatingValue(0);
+      setRoomId(null);
+      setIsSubmittingReview(false);
+      setIsRatingVisible(false);
+    }
+  }
+
+  async function fetchUserData() {
     const { data } = await axios.get<User>("/api/users");
     return data;
-  };
+  }
 
   const {
     data: userBookings,
@@ -144,7 +183,7 @@ function Page({ params }: { params: any }) {
                 <Table
                   bookingDetails={userBookings}
                   setRoomId={setRoomId}
-                  // toggleRatingModal={toggleRatingModal}
+                  toggleRatingModal={toggleRatingModal}
                 />
               )
             : null}
@@ -156,6 +195,18 @@ function Page({ params }: { params: any }) {
           )}
         </div>
       </div>
+
+      <RatingModal
+        isOpen={isRatingVisible}
+        ratingValue={ratingValue}
+        setRatingValue={setRatingValue}
+        ratingText={ratingText}
+        setRatingText={setRatingText}
+        isSubmittingReview={isSubmittingReview}
+        reviewSubmitHandler={reviewSubmitHandler}
+        toggleRatingModal={toggleRatingModal}
+      />
+      <Backdrop isOpen={isRatingVisible} />
     </div>
   );
 }
