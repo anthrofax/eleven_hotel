@@ -20,8 +20,6 @@ function Auth() {
   const { data: session } = useSession();
   const router = useRouter();
 
-  console.log(session);
-
   useEffect(
     function () {
       if (!session) return;

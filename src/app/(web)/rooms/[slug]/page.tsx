@@ -11,12 +11,14 @@ import { GiSmokeBomb } from "react-icons/gi";
 import BookRoomCTA from "@/components/BookRoomCTA/book-room-cta";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { getStripe } from "@/libs/stripe";
+import axios from "axios";
 
 function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
-  const [dewasa, setDewasa] = useState<number>(1);
+  const [jumlahOrangDewasa, setJumlahOrangDewasa] = useState<number>(1);
   const [jumlahAnak, setJumlahAnak] = useState<number>(0);
 
   const {
@@ -24,6 +26,15 @@ function Page({ params }: { params: { slug: string } }) {
     error,
     isLoading,
   } = useSWR("/api/room", getRoom.bind(null, slug));
+
+  function hitungMasaInap(): number {
+    if (!checkinDate || !checkoutDate) return 0;
+
+    const selisihWaktu = checkoutDate.getTime() - checkinDate.getTime();
+    const masaInap = Math.ceil(selisihWaktu / (24 * 60 * 60 * 1000));
+
+    return masaInap;
+  }
 
   function hitungMinimumTanggalCheckout() {
     if (!checkinDate) return null;
@@ -34,7 +45,7 @@ function Page({ params }: { params: { slug: string } }) {
     return nextDay;
   }
 
-  function bookingKamar() {
+  async function bookingKamar() {
     if (!checkinDate || !checkoutDate)
       return toast.error(
         "Mohon isi tanggal Check-in & Check-out terlebih dahulu"
@@ -43,11 +54,38 @@ function Page({ params }: { params: { slug: string } }) {
     if (checkinDate > checkoutDate)
       return toast.error("Mohon isi tanggal Check-in yang valid");
 
-    const masaPenginapan = hitungMinimumTanggalCheckout();
+    const masaInap = hitungMasaInap();
+
+    console.log(masaInap)
 
     const slugKamar = room?.slug.current;
 
     // Implement Stripe
+    const stripe = await getStripe();
+
+    try {
+      const { data: stripeSession } = await axios.post("/api/stripe", {
+        checkinDate,
+        checkoutDate,
+        jumlahOrangDewasa,
+        jumlahAnak,
+        masaInap,
+        slugKamar,
+      });
+
+      if (stripe) {
+        const result = await stripe.redirectToCheckout({
+          sessionId: stripeSession.id,
+        });
+
+        if (result.error) {
+          toast.error("Payment Failed");
+        }
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+      toast.error("An error occured");
+    }
   }
 
   if (error) throw new Error("Cannot fetch data");
@@ -148,12 +186,13 @@ function Page({ params }: { params: { slug: string } }) {
               checkoutDate={checkoutDate}
               setCheckoutDate={setCheckoutDate}
               hitungMinimumTanggalCheckout={hitungMinimumTanggalCheckout}
-              dewasa={dewasa}
+              jumlahOrangDewasa={jumlahOrangDewasa}
               jumlahAnak={jumlahAnak}
-              setAdults={setDewasa}
+              setAdults={setJumlahOrangDewasa}
               setNoOfChildren={setJumlahAnak}
               isBooked={room.isBooked}
               bookingKamar={bookingKamar}
+              hitungMasaInap={hitungMasaInap}
             />
           </div>
         </div>

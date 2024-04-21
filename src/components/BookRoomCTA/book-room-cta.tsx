@@ -12,11 +12,12 @@ type Props = {
   hitungMinimumTanggalCheckout: () => Date | null;
   harga: number;
   diskon: number;
-  dewasa: number;
+  jumlahOrangDewasa: number;
   jumlahAnak: number;
   catatanPelanggan: string;
   isBooked: boolean;
   bookingKamar: () => void;
+  hitungMasaInap: () => number 
 };
 
 function BookRoomCTA(props: Props) {
@@ -30,21 +31,15 @@ function BookRoomCTA(props: Props) {
     hitungMinimumTanggalCheckout,
     harga,
     diskon,
-    dewasa,
+    jumlahOrangDewasa,
     jumlahAnak,
     catatanPelanggan,
     isBooked,
     bookingKamar,
+    hitungMasaInap
   } = props;
 
   const hargaDiskon = harga - (harga / 100) * diskon;
-
-  const calcNoOfDays = () => {
-    if (!checkinDate || !checkoutDate) return 0;
-    const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-    const noOfDays = Math.ceil(timeDiff / (24 * 60 * 60 * 1000));
-    return noOfDays;
-  };
 
   return (
     <div className="px-7 py-6">
@@ -114,7 +109,7 @@ function BookRoomCTA(props: Props) {
           <input
             type="number"
             id="adults"
-            value={dewasa}
+            value={jumlahOrangDewasa}
             onChange={(e) => setAdults(+e.target.value)}
             min={1}
             max={5}
@@ -140,8 +135,8 @@ function BookRoomCTA(props: Props) {
         </div>
       </div>
 
-      {calcNoOfDays() > 0 ? (
-        <p className="mt-3">Total: Rp. {calcNoOfDays() * hargaDiskon}</p>
+      {hitungMasaInap() > 0 ? (
+        <p className="mt-3">Total: Rp. {hitungMasaInap() * hargaDiskon}</p>
       ) : (
         <></>
       )}
