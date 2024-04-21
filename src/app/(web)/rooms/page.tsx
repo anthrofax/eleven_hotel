@@ -41,9 +41,6 @@ function Page() {
 
       if (searchQueryParams) setSearchQuery(searchQueryParams);
       if (roomTypeParams) setRoomType(roomTypeParams);
-
-      console.log(searchQuery);
-      console.log(roomType);
     },
     [searchParams, searchQuery, roomType]
   );
@@ -56,8 +53,6 @@ function Page() {
     throw new Error("Data tidak ditemukan.");
 
   const filteredRooms = filterRoom(data || []);
-
-  console.log(filteredRooms)
 
   return (
     <div className="container mx-auto pt-10">

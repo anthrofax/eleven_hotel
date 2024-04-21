@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity';
+import { groq } from "next-sanity";
 
 export const getFeaturedRoomQuery = groq`*[_type == "kamarHotel" && isFeatured == true][0] {
     _id,
@@ -41,4 +41,31 @@ export const getRoom = groq`*[_type == "kamarHotel" && slug.current == $slug][0]
     slug,
     catatanPelanggan,
     type
+}`;
+
+export const getUserBookingsQuery = groq`*[_type == 'booking' && user._ref == $userId] {
+    _id,
+    kamarHotel -> {
+        _id,
+        nama,
+        slug,
+        harga
+    },
+    tanggalCheckin,
+    tanggalCheckout,
+    masaInap,
+    jumlahOrangDewasa,
+    jumlahAnak,
+    hargaTotal,
+    diskon
+}`;
+
+export const getUserDataQuery = groq`*[_type == 'user' && _id == $userId][0] {
+    _id,
+    name,
+    email,
+    isAdmin,
+    tentang,
+    _createdAt,
+    image,
 }`;

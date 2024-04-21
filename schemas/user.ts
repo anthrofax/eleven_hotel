@@ -42,8 +42,8 @@ const user = {
       hidden: true,
     }),
     defineField({
-      name: "about",
-      title: "About",
+      name: "tentang",
+      title: "Tentang",
       type: "text",
       description: "Deskripsi singkat dari pengguna",
     }),

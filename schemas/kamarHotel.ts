@@ -39,7 +39,7 @@ const kamarHotel = {
       name: "harga",
       title: "Harga",
       type: "number",
-      validation: (Rule) => Rule.min(100).error("Minimum 100 karakter"),
+      validation: (Rule) => Rule.min(500000).error("Minimum harga adalah Rp. 500.000,00-"),
     }),
     defineField({
       name: "diskon",

@@ -10,8 +10,6 @@ type Props = {
 function RoomCard({ room }: Props) {
   const { coverGambar, nama, harga, type, deskripsi, slug, isBooked } = room;
 
-  console.log(coverGambar)
-
   return (
     <div className="rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black">
       <div className="h-60 overflow-hidden">

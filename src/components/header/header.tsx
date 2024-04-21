@@ -23,7 +23,7 @@ function Header() {
         <ul className="flex items-center ml-5">
           <li className="flex items-center">
             {session ? (
-              <Link href={`users/${session.user.id}`}>
+              <Link href={`/users/${session.user.id}`}>
                 <div className="w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
                   <Image
                     className=" scale-animation"
