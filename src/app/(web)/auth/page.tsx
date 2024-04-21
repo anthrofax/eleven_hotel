@@ -38,13 +38,9 @@ function Auth() {
     setFormData({ ...formData, [name]: value });
   }
 
-  async function loginHandler(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function loginHandler() {
     try {
       await signIn();
-
-      toast.success("Login berhasil dilakukan");
 
       // router.push("/");
     } catch (err) {
