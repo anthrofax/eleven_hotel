@@ -3,5 +3,5 @@ export { default } from "next-auth/middleware";
 
 // Path mana middleware akan diterapkan
 export const config = {
-  matcher: ["/users/:path*", "/api/:path*"], // Jika user mengunjungi path tersebut, dengan menggunakan "default" middleware, request user tidak akan diproses lebih lanjut
+  matcher: ["/users/:path*"], // Jika user mengunjungi path tersebut, dengan menggunakan "default" middleware, request user tidak akan diproses lebih lanjut
 };

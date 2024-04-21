@@ -17,6 +17,8 @@ import axios from "axios";
 function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
+
+  console.log(checkinDate);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
   const [jumlahOrangDewasa, setJumlahOrangDewasa] = useState<number>(1);
   const [jumlahAnak, setJumlahAnak] = useState<number>(0);
@@ -56,7 +58,7 @@ function Page({ params }: { params: { slug: string } }) {
 
     const masaInap = hitungMasaInap();
 
-    console.log(masaInap)
+    console.log(masaInap);
 
     const slugKamar = room?.slug.current;
 
@@ -79,18 +81,18 @@ function Page({ params }: { params: { slug: string } }) {
         });
 
         if (result.error) {
-          toast.error("Payment Failed");
+          toast.error("Pembayaran gagal");
         }
       }
     } catch (error) {
       console.log("Error: ", error);
-      toast.error("An error occured");
+      toast.error("Terdapat kesalahan.");
     }
   }
 
-  if (error) throw new Error("Cannot fetch data");
+  if (error) throw new Error("Terdapat kesalahan saat fetch data");
   if (typeof room === "undefined" && !isLoading)
-    throw new Error("Cannot fetch data");
+    throw new Error("Data kamar tidak ditemukan");
 
   if (!room) return <LoadingSpinner />;
 

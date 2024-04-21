@@ -40,8 +40,6 @@ export async function POST(req: Request, res: Response) {
 
   const origin = req.headers.get("origin");
 
-  console.log("Origin: " + origin);
-
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -75,6 +73,17 @@ export async function POST(req: Request, res: Response) {
       ],
       payment_method_types: ["card"],
       success_url: `${origin}/users/${userId}`,
+      metadata: {
+        jumlahOrangDewasa,
+        tanggalCheckin: formattedCheckinDate,
+        tanggalCheckout: formattedCheckoutDate,
+        jumlahAnak,
+        diskon: room.diskon,
+        kamarHotel: room._id,
+        masaInap,
+        hargaTotal,
+        userId,
+      },
     });
 
     return NextResponse.json(stripeSession, {
