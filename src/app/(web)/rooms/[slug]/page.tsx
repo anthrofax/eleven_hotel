@@ -13,6 +13,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { getStripe } from "@/libs/stripe";
 import axios from "axios";
+import RoomReview from "@/components/RoomReview/room-review";
 
 function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -172,7 +173,7 @@ function Page({ params }: { params: { slug: string } }) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Reviews */}
+                  <RoomReview idKamar={room._id} />
                 </div>
               </div>
             </div>

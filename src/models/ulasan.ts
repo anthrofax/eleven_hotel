@@ -11,7 +11,7 @@ export type CreateReviewDto = {
   userId: string;
 };
 
-export type Review = {
+export type Ulasan = {
   teks: string;
   user: { name: string };
   ratingPengguna: number;
