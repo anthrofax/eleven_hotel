@@ -1,6 +1,7 @@
 import { Room } from "@/models/room";
 import Image from "next/image";
 import Link from "next/link";
+import CountUpNumber from "../CountUpNumber/count-up-number";
 
 type Props = {
   featuredRoom: Room;
@@ -8,8 +9,45 @@ type Props = {
 
 function FeaturedRoom({ featuredRoom }: Props) {
   return (
-    <section className="flex md:flex-row flex-col px-4 py-10 items-center gap-12 container mx-auto">
+    <section className="px-20 items-center gap-12 container mx-auto">
+
+    <div className= "container mx-auto">
+        <div className="flex justify-between mt-12">
+          <div className="flex gap-3 flex-col items-center justify-center">
+            <p className="text-xs lg:text-xl text-center">Basic Room </p>
+            <CountUpNumber duration={3000} endValue={200} />  
+          </div>
+          <div className="flex gap-3 flex-col items-center justify-center">
+            <p className="text-xs lg:text-xl text-center">Luxury Room </p>
+            <CountUpNumber duration={3000} endValue={100} />
+          </div>
+          <div className="flex gap-3 flex-col items-center justify-center">
+            <p className="text-xs lg:text-xl text-center">Suite</p>
+            <CountUpNumber duration={3000} endValue={50} />
+          </div>
+        </div>
+    </div>
+
+    <div className= "h-56 mt-20 gap-12 container mx-auto">
+        <div className="flex flex-row ">
+          <div className="basis-1/2 content-center items-stretch">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur totam commodi, ullam eligendi et libero in quaerat beatae vitae, odio temporibus quos, veniam magnam doloremque qui ducimus omnis quae.</p>
+          </div>
+          <div className="basis-1/2 content-center items-stretch"> 
+            <Image
+              src="/images/hero-2.jpeg"
+              alt="Hero Image 2"
+              width={300}
+              height={300}
+              className="h-64 min-w-80 max-width-96"
+            />
+            </div>
+        </div>
+    </div>
+    
+    <div className="bg-amber-400 rounded-2xl mt-20 flex md:flex-row flex-col px-4 py-10 items-center gap-12 container mx-auto">
       <div className="md:grid gap-8 grid-cols-1">
+        
         <div className="rounded-2xl overflow-hidden h-48 mb-4 md:mb-0">
           <Image
             src={featuredRoom.coverGambar.url}
@@ -62,6 +100,7 @@ function FeaturedRoom({ featuredRoom }: Props) {
             More Details
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

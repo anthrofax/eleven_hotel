@@ -3,7 +3,42 @@ import CountUpNumber from "../CountUpNumber/count-up-number";
 
 function HeroSection() {
   return (
-    <section className="flex px-4 items-center gap-12 container mx-auto">
+    <section className="mx-auto flex px-4 items-center gap-12 container">
+
+      <div className="container mx-auto">
+        <div className="h-100 rounded-sm overflow-hidden">
+          <figure className="min-w-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+  
+              <Image 
+                src="/images/hero-2.jpeg" 
+                alt="Hero Image 2" 
+                width={1000}
+                height={1000}
+                className="min-w-full max-w-1000 h-80"
+              />
+            <figcaption className="absolute px-4 text-lg text-white bottom-6">
+              <h1 >EXPLORE THE LUXURY</h1>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+{/*
+          <div>
+            <h1>EXPLORE THE LUXURY</h1>
+            <Image
+              src="/images/hero-2.jpeg"
+              alt="Hero Image 2"
+              width={1000}
+              height={1000}
+              className="w-24 min-w-full"
+            />
+          </div>
+        </div>
+      </div>
+/*}
+
+      {/*
       <div className="py-10 h-full">
         {" "}
         <h1 className="font-heading mb-6">Explore Our Exquisite Hotel</h1>
@@ -16,6 +51,7 @@ function HeroSection() {
           <div className="flex gap-3 flex-col items-center justify-center">
             <p className="text-xs lg:text-xl text-center">Basic Room </p>
             <CountUpNumber duration={3000} endValue={200} />
+            
           </div>
           <div className="flex gap-3 flex-col items-center justify-center">
             <p className="text-xs lg:text-xl text-center">Luxury Room </p>
@@ -27,8 +63,9 @@ function HeroSection() {
           </div>
         </div>
       </div>
+      
 
-      {/* IMAGES */}
+      // IMAGES 
       <div className="md:grid hidden gap-8 grid-cols-1">
         <div className="rounded-2xl overflow-hidden h-48">
           <Image
@@ -63,6 +100,7 @@ function HeroSection() {
           </div>
         </div>
       </div>
+  */}
     </section>
   );
 }

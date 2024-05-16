@@ -72,7 +72,7 @@ function Search({
             onChange={handleSearchQueryChange}
           />
         </div>
-
+        
         <button
           className="btn-primary"
           type="button"
