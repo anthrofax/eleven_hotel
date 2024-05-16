@@ -72,6 +72,9 @@ function Header() {
         <li className="hover:-translate-y-2 duration-500 transition-all">
           <Link href="/contact">Contact</Link>
         </li>
+        <li className="hover:-translate-y-2 duration-500 transition-all">
+          <Link href="/about-us">About Us</Link>
+        </li>
       </ul>
     </header>
   );

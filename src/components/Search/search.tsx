@@ -74,7 +74,7 @@ function Search({
         </div>
         
         <button
-          className="btn-primary"
+          className="btn-tertiary"
           type="button"
           onClick={handleFilterClick}
         >
