@@ -8,26 +8,26 @@ function MemberListPage() {
         OUR AWESOME MINDS
       </h1>
       <p className="mt-5 text-sm sm:text-base w-[80%] leading-8 text-center mx-auto mb-10">
-        Ide Cemerlang dibalik Volunteeria
+        Ide Cemerlang dibalik Eleven Hotel
       </p>
 
       <div className="hidden sm:flex flex-col gap-20">
         <div className="flex flex-col sm:flex-row gap-20 justify-center items-center">
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
+          <MemberCard memberId="alma" />
+          <MemberCard memberId="gudang" />
+          <MemberCard memberId="risma" />
+        </div>
+        <div className="flex flex-col sm:flex-row gap-20 justify-center items-center">
+          <MemberCard memberId="mahes" />
+          <MemberCard memberId="sopian" />
+          <MemberCard memberId="zulhi" />
+          <MemberCard memberId="yesaya" />
         </div>
         <div className="flex flex-col sm:flex-row gap-20 justify-center items-center">
           <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
-        </div>
-        <div className="flex flex-col sm:flex-row gap-20 justify-center items-center">
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
-          <MemberCard memberId="edo" />
+          <MemberCard memberId="adit" />
+          <MemberCard memberId="ari" />
+          <MemberCard memberId="ikhsan" />
         </div>
       </div>
     </section>
