@@ -28,6 +28,12 @@ export async function POST(req: Request, res: Response) {
     masaInap,
   }: RequestData = await req.json();
 
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return new NextResponse("Authentication required", { status: 400 });
+  }
+  
   if (
     !tanggalCheckin ||
     !tanggalCheckout ||
@@ -40,11 +46,6 @@ export async function POST(req: Request, res: Response) {
 
   const origin = req.headers.get("origin");
 
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    return new NextResponse("Authentication required", { status: 400 });
-  }
 
   const userId = session.user.id;
   const formattedCheckoutDate = tanggalCheckout.split("T")[0];

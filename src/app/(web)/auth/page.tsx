@@ -41,8 +41,6 @@ function Auth() {
   async function loginHandler() {
     try {
       await signIn();
-
-      // router.push("/");
     } catch (err) {
       toast.error("Gagal melakukan login");
     }
@@ -55,6 +53,7 @@ function Auth() {
       // Invoke POST request to api/sanity/signUp route.
       const user = await signUp(formData);
 
+      loginHandler();
       if (user) toast.success("Akun anda berhasil didaftarkan.");
     } catch (err) {
       console.log(err);
