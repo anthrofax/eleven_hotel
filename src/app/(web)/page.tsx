@@ -15,7 +15,6 @@ export default async function Home() {
       <PageSearch />
       <FeaturedRoom featuredRoom={featuredRoom} />
       <Gallery />
-      <NewsLetter />
     </>
   );
 }

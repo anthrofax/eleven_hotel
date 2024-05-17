@@ -8,20 +8,46 @@ function HeroSection() {
       <div className="container mx-auto">
         <div className="h-100 rounded-sm overflow-hidden">
           <figure className="min-w-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
-  
-              <Image 
-                src="/images/hero-2.jpeg" 
-                alt="Hero Image 2" 
-                width={1000}
-                height={1000}
-                className="min-w-full max-w-1000 h-80"
-              />
+
+            <Image
+              src="/images/hero-2.jpeg"
+              alt="Hero Image 2"
+              width={1000}
+              height={1000}
+              className="min-w-full max-w-1000 h-80"
+            />
             <figcaption className="absolute px-4 text-lg text-white bottom-6">
               <h1 >EXPLORE THE LUXURY</h1>
             </figcaption>
           </figure>
         </div>
       </div>
+    </section>
+  );
+}
+
+export default HeroSection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {/*
           <div>
@@ -101,8 +127,4 @@ function HeroSection() {
         </div>
       </div>
   */}
-    </section>
-  );
-}
 
-export default HeroSection;
