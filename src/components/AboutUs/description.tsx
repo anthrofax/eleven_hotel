@@ -7,18 +7,7 @@ function Description() {
         Tentang Perusahaan Kami
       </h1>
       <p className="mt-5 text-sm sm:text-base w-[80%] leading-8 text-justify sm:text-center mx-auto">
-        Kami adalah Volunteeria, sebuah platform yang dipenuhi dengan semangat
-        untuk memberikan perubahan positif. Misi kami adalah menghubungkan
-        orang-orang yang ingin memberikan kembali dengan proyek-proyek yang
-        membutuhkan bantuan mereka. Kami percaya bahwa setiap tindakan baik,
-        sekecil apapun, memiliki kekuatan untuk merubah dunia. Dengan
-        Volunteeria, Anda dapat menjelajahi berbagai kesempatan sukarela yang
-        cocok dengan minat dan keterampilan Anda. Kami menyediakan alat yang
-        memudahkan Anda untuk terlibat dalam aksi sosial, membangun komunitas
-        yang lebih baik, dan memberikan dampak positif dalam hidup orang lain.
-        Bersama-sama, mari kita menjadi bagian dari perubahan yang kita
-        inginkan. Bergabunglah dengan kami di Volunteeria dan mari berbuat baik
-        bersama-sama!
+      Kami adalah Eleven Hotel, destinasi sempurna untuk kenyamanan dan kemewahan. Terletak di jantung kota, hotel kami menawarkan akomodasi yang elegan dan pelayanan kelas satu untuk memenuhi segala kebutuhan Anda. Kami berkomitmen untuk memberikan pengalaman menginap yang tak terlupakan dengan fasilitas lengkap, mulai dari kamar yang nyaman dan berdesain modern, hingga restoran mewah yang menyajikan kuliner terbaik. Baik Anda berkunjung untuk bisnis maupun liburan, tim kami yang profesional siap melayani Anda dengan kehangatan dan dedikasi. Nikmati momen istimewa bersama kami dan rasakan keindahan pelayanan yang dirancang khusus untuk Anda di Eleven Hotel. Bergabunglah dengan kami dan temukan pengalaman menginap yang luar biasa!
       </p>
 
       <ul className="py-16 px-10 flex flex-col sm:flex-row gap-10">
@@ -34,10 +23,7 @@ function Description() {
             SIAPA KAMI
           </h3>
           <p className="leading-7 text-xs sm:text-sm sm:leading-8 text-left">
-            Kami adalah komunitas sukarelawan yang bersemangat dan peduli.
-            Dengan beragam latar belakang dan keahlian, kami bersatu dalam tekad
-            untuk memberikan dampak positif dalam masyarakat. Bergabunglah
-            dengan kami dan kenali lebih dekat siapa kami di Volunteeria.
+            Kami adalah tim yang berdedikasi di Eleven Hotel, terdiri dari individu yang berbakat dan bersemangat dalam menciptakan pengalaman menginap yang istimewa bagi setiap tamu. Bergabunglah dengan kami dan temukan keajaiban di balik layanan kami di Eleven Hotel.
           </p>
         </li>
         <li className="">
@@ -52,10 +38,7 @@ function Description() {
             MISI KAMI
           </h3>
           <p className="text-right sm:text-left leading-7 text-xs sm:text-sm sm:leading-8">
-            Misi kami adalah menginspirasi dan memfasilitasi aksi sukarela yang
-            bermakna. Kami berkomitmen untuk menghubungkan para sukarelawan
-            dengan proyek-proyek yang sesuai dengan minat dan keterampilan
-            mereka, sehingga bersama-sama kita dapat mencapai perubahan positif.
+            Misi kami adalah memastikan setiap tamu merasakan pengalaman menginap yang tak terlupakan melalui layanan kelas satu dan fasilitas berkualitas tinggi. Kami berkomitmen untuk menciptakan suasana yang nyaman dan mewah, sehingga setiap kunjungan menjadi momen istimewa.
           </p>
         </li>
         <li className="">
@@ -70,10 +53,7 @@ function Description() {
             VISI KAMI
           </h3>
           <p className="text-center sm:text-left leading-7 text-xs sm:text-sm sm:leading-8">
-            Visi kami adalah menciptakan dunia yang dipenuhi dengan aksi-aksi
-            sukarela yang membawa perubahan positif. Kami bermimpi tentang
-            masyarakat yang saling peduli dan berbagi, di mana setiap tindakan
-            baik memiliki dampak jauh lebih besar.
+            Visi kami adalah menciptakan lingkungan yang hangat dan ramah di Eleven Hotel, di mana setiap tamu merasa diterima dan dihargai. Kami bertekad untuk menjadi destinasi utama yang menawarkan pengalaman menginap yang istimewa dan tak terlupakan.
           </p>
         </li>
       </ul>

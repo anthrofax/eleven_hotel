@@ -14,7 +14,7 @@ export default async function Home() {
       <HeroSection />;
       <PageSearch />
       <FeaturedRoom featuredRoom={featuredRoom} />
-      <Gallery />
+      <Gallery/>
     </>
   );
 }
