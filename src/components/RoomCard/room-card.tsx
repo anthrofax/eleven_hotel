@@ -10,11 +10,13 @@ type Props = {
 function RoomCard({ room }: Props) {
   const { coverGambar, nama, harga, type, deskripsi, slug, isBooked } = room;
 
+  if (!nama) return null;
+
   return (
     <div className="rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black">
       <div className="h-60 overflow-hidden">
         <Image
-          src={coverGambar.url}
+          src={coverGambar?.url}
           alt={nama}
           width={250}
           height={250}
