@@ -40,7 +40,7 @@ function HotelPhotoGallery(
 
   return (
     <div
-      className={`container mx-auto border-8 border-tertiary-light rounded-2xl w-3/4 h-fit ${className}`}
+      className={`container mx-auto border-8 border-tertiary-light rounded-2xl w-[60%] h-fit ${className}`}
     >
       <div className="grid md:grid-cols-2 relative">
         <div className="h-full relative rounded-tl-lg overflow-hidden">

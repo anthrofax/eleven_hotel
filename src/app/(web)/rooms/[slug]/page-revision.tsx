@@ -119,7 +119,6 @@ function Page({ params }: { params: { slug: string } }) {
                 ))}
               </div>
 
-
               <div className="mb-11">
                 <h2 className="font-bold text-3xl mb-2">Description</h2>
                 <p>{room.deskripsi}</p>
@@ -195,6 +194,7 @@ function Page({ params }: { params: { slug: string } }) {
               isBooked={room.isBooked}
               bookingKamar={bookingKamar}
               hitungMasaInap={hitungMasaInap}
+              nama={room.nama}
             />
           </div>
         </div>

@@ -1,6 +1,10 @@
-import { Dispatch, SetStateAction, useState } from "react";
+// @refresh reset
+
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import BookStageView from "./book-stage-view";
+import { IoChevronBackCircle } from "react-icons/io5";
+import PaymentStageView from "./payment-stage-view";
 
 type Props = {
   checkinDate: Date | null;
@@ -18,6 +22,7 @@ type Props = {
   isBooked: boolean;
   bookingKamar: () => void;
   hitungMasaInap: () => number;
+  nama: string;
 };
 
 function BookRoomCTA(props: Props) {
@@ -37,39 +42,53 @@ function BookRoomCTA(props: Props) {
     isBooked,
     bookingKamar,
     hitungMasaInap,
+    nama,
   } = props;
 
   const hargaDiskon = harga - (harga / 100) * diskon;
 
   const [bookingStage, setBookingStage] = useState<"booking" | "payment">(
-    "booking"
+    "payment"
+  );
+
+  useEffect(
+    function () {
+      if (!checkinDate || !checkoutDate || !jumlahOrangDewasa || !jumlahAnak) {
+        setBookingStage("booking");
+      }
+    },
+    [checkinDate, checkoutDate, jumlahAnak, jumlahOrangDewasa]
   );
 
   return (
-    <div className="px-7 py-6 bg-tertiary-light rounded-2xl w-full">
-      <h3 className="text-2xl font-semibold text-center">Super Room Eleven</h3>
+    <div className="px-7 py-6 bg-tertiary-light rounded-2xl w-full relative">
+      <h3 className="text-2xl font-semibold text-center">{nama}</h3>
 
       <div className="w-full border-b-2 border-b-secondary mt-2 mb-5" />
 
-      {/* <div className="bg-primary rounded-full w-full py-2 px-5 flex justify-between text-white items-center text-lg">
-        <p>Total </p>
-        <h3>
-          <span
-            className={`${diskon ? "text-gray-400" : ""} font-thin  text-xl`}
-          >
-            Rp. {harga}
-          </span>
-          {diskon ? (
-            <span className="font-bold text-xl">
-              {" "}
-              | Diskon {diskon}% saat ini,{" "}
-              <span className="text-tertiary-dark">Rp. {hargaDiskon}</span>
-            </span>
-          ) : (
-            ""
-          )}
-        </h3>
-      </div> */}
+      {bookingStage === "payment" && (
+        <>
+          <IoChevronBackCircle
+            size={50}
+            color="#0C356A"
+            className="absolute left-3 top-2 hover:scale-105 duration-300 transition-all cursor-pointer"
+            onClick={() => setBookingStage("booking")}
+          />
+
+          <PaymentStageView
+            bookingKamar={bookingKamar}
+            checkinDate={checkinDate}
+            checkoutDate={checkoutDate}
+            diskon={diskon}
+            harga={harga}
+            hargaDiskon={hargaDiskon}
+            isBooked={isBooked}
+            jumlahAnak={jumlahAnak}
+            jumlahOrangDewasa={jumlahOrangDewasa}
+            hitungMasaInap={hitungMasaInap}
+          />
+        </>
+      )}
 
       {bookingStage === "booking" && (
         <BookStageView

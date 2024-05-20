@@ -100,7 +100,7 @@ function Page({ params }: { params: { slug: string } }) {
       <div className="gap-5 hidden md:flex">
         <HotelPhotoGallery photos={room.gambar} />
 
-        <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow">
+        <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow w-[40%]">
           <BookRoomCTA
             diskon={room.diskon}
             harga={room.harga}
@@ -117,6 +117,7 @@ function Page({ params }: { params: { slug: string } }) {
             isBooked={room.isBooked}
             bookingKamar={bookingKamar}
             hitungMasaInap={hitungMasaInap}
+            nama={room.nama}
           />
         </div>
       </div>
@@ -199,6 +200,7 @@ function Page({ params }: { params: { slug: string } }) {
           isBooked={room.isBooked}
           bookingKamar={bookingKamar}
           hitungMasaInap={hitungMasaInap}
+          nama={room.nama}
         />
       </div>
     </div>

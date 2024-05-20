@@ -3,6 +3,7 @@ import { LuBaby } from "react-icons/lu";
 import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import { Dispatch, SetStateAction } from "react";
+import toast from "react-hot-toast";
 
 type Props = {
   checkinDate: Date | null;
@@ -36,14 +37,14 @@ function BookStageView(props: Props) {
     isBooked,
     hitungMasaInap,
     setBookingStage,
-    hargaDiskon
+    hargaDiskon,
   } = props;
 
   return (
     <>
       <h4 className="my-8">{catatanPelanggan}</h4>
 
-      <div className="flex justify-between gap-3">
+      <div className="flex justify-between gap-5">
         <div className="w-1/2 pr-2 ">
           <label
             htmlFor="check-in-date"
@@ -58,7 +59,7 @@ function BookStageView(props: Props) {
             dateFormat="dd/MM/yyyy"
             minDate={new Date()}
             id="check-in-date"
-            className="w-[150%] border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary bg-tertiary-superLight"
+            className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary bg-tertiary-superLight"
             showIcon
             icon={<FaCalendarAlt size={25} color="#0C356A" />}
           />
@@ -78,7 +79,7 @@ function BookStageView(props: Props) {
             disabled={!checkinDate}
             minDate={hitungMinimumTanggalCheckout()}
             id="check-out-date"
-            className="w-[150%] border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary"
+            className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary bg-tertiary-superLight"
             showIcon
             icon={<FaCalendarAlt size={25} color="#0C356A" />}
           />
@@ -140,15 +141,14 @@ function BookStageView(props: Props) {
         </div>
       </div>
 
-      {hitungMasaInap() > 0 ? (
-        <p className="mt-3">Total: Rp. {hitungMasaInap() * hargaDiskon}</p>
-      ) : (
-        <></>
-      )}
-
       <button
         disabled={isBooked}
-        onClick={() => setBookingStage('payment')}
+        onClick={() => {
+          if (!checkinDate || !checkoutDate || !jumlahOrangDewasa)
+            return toast.error("Mohon isi data booking terlebih dahulu");
+
+          setBookingStage("payment");
+        }}
         className="btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed"
       >
         {isBooked ? "Booked" : "Booking Now!"}
