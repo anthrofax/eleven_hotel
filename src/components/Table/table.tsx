@@ -13,6 +13,12 @@ function Table({
 }) {
   const router = useRouter();
 
+  let Rupiah = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+
+
   return (
     <div className="overflow-x-auto max-w-[340px] rounded-lg mx-auto md:max-w-full shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500">
@@ -41,9 +47,9 @@ function Table({
               >
                 {booking.kamarHotel.nama}
               </th>
-              <td className="px-6 py-4">{booking.kamarHotel.harga}</td>
-              <td className="px-6 py-4">{booking.hargaTotal}</td>
-              <td className="px-6 py-4">{booking.diskon}</td>
+              <td className="px-6 py-4">{Rupiah.format(booking.kamarHotel.harga)}</td>
+              <td className="px-6 py-4">{Rupiah.format(booking.hargaTotal)}</td>
+              <td className="px-6 py-4">{booking.diskon}%</td>
               <td className="px-6 py-4">{booking.masaInap}</td>
               <td className="px-6 py-4">0</td>
               <td className="px-6 py-4">
