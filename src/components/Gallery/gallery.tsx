@@ -8,7 +8,7 @@ const Gallery = () => {
           <div className="w-1/2 p-1 md:p-2 h-48">
             <Image
               alt="gallery"
-              className="img"
+              className="img rounded-2xl"
               src="/images/hero-1.jpeg"
               width={200}
               height={200}
@@ -17,7 +17,7 @@ const Gallery = () => {
           <div className="w-1/2 p-1 md:p-2 h-48">
             <Image
               alt="gallery"
-              className="img"
+              className="img rounded-2xl"
               src="/images/hero-2.jpeg"
               width={200}
               height={200}
@@ -26,7 +26,7 @@ const Gallery = () => {
           <div className="w-full p-1 md:p-2 h-48">
             <Image
               alt="gallery"
-              className="img"
+              className="img rounded-2xl"
               src="/images/hero-3.jpeg"
               width={200}
               height={200}
@@ -37,7 +37,7 @@ const Gallery = () => {
           <div className="w-full p-1 md:p-2 h-48">
             <Image
               alt="gallery"
-              className="img"
+              className="img rounded-2xl"
               src="/images/hero-1.jpeg"
               width={200}
               height={200}
@@ -46,7 +46,7 @@ const Gallery = () => {
           <div className="w-1/2 p-1 md:p-2 h-48">
             <Image
               alt="gallery"
-              className="img"
+              className="img rounded-2xl"
               src="/images/hero-2.jpeg"
               width={200}
               height={200}
@@ -55,7 +55,7 @@ const Gallery = () => {
           <div className="w-1/2 p-1 md:p-2 h-48">
             <Image
               alt="gallery"
-              className="img"
+              className="img rounded-2xl"
               src="/images/hero-3.jpeg"
               width={200}
               height={200}

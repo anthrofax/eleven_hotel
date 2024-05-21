@@ -29,19 +29,21 @@ function FeaturedRoom({ featuredRoom }: Props) {
       </div>
 
       <div className="h-56 mt-20 gap-12 container mx-auto">
-        <div className="flex flex-row ">
-          <div className="basis-1/2 content-center items-stretch">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur totam commodi, ullam eligendi et libero in quaerat beatae vitae, odio temporibus quos, veniam magnam doloremque qui ducimus omnis quae.</p>
-          </div>
-          <div className="basis-1/2 content-center items-stretch">
+        <div className="flex justify-between ">
+        <div className="basis-1/2 content-center items-stretch">
             <Image
               src="/images/hero-2.jpeg"
               alt="Hero Image 2"
               width={300}
               height={300}
-              className="h-64 min-w-80 max-width-96"
+              className="h-64 min-w-80 max-width-96 rounded-md"
             />
           </div>
+
+          <div className="basis-1/2 content-center items-stretch">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur totam commodi, ullam eligendi et libero in quaerat beatae vitae, odio temporibus quos, veniam magnam doloremque qui ducimus omnis quae.</p>
+          </div>
+          
         </div>
       </div>
 

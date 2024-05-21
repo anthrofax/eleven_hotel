@@ -6,7 +6,7 @@ function HeroSection() {
     <section className="mx-auto flex px-4 items-center gap-12 container">
 
       <div className="container mx-auto">
-        <div className="h-100 rounded-sm overflow-hidden">
+        <div className="h-100 rounded-md overflow-hidden">
           <figure className="min-w-full transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
 
             <Image
