@@ -10,11 +10,18 @@ type Props = {
 function RoomCard({ room }: Props) {
   const { coverGambar, nama, harga, type, deskripsi, slug, isBooked } = room;
 
+  let Rupiah = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+
+  if (!nama) return null;
+
   return (
     <div className="rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black">
       <div className="h-60 overflow-hidden">
         <Image
-          src={coverGambar.url}
+          src={coverGambar?.url}
           alt={nama}
           width={250}
           height={250}
@@ -25,12 +32,14 @@ function RoomCard({ room }: Props) {
       <div className="p-4 bg-white">
         <div className="flex justify-between text-lg font-semibold">
           <p>{nama}</p>
-          <p>Rp. {harga}</p>
+          <p>{Rupiah.format(harga)}</p>
         </div>
 
-        <p className="pt-2 text-xs">{type} Room</p>
+        <p className="pt-2 text-xs">
+          {`${type[0].toUpperCase() + type.slice(1)}`} Room
+        </p>
 
-        <p className="pt-3 pb-6">{deskripsi.slice(1, 100)}...</p>
+        <p className="pt-3 pb-6">{deskripsi.slice(0, 100)}...</p>
 
         <Link
           href={`/rooms/${slug.current}`}

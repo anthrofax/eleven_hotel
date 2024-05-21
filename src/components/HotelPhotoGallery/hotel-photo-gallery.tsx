@@ -9,7 +9,7 @@ import { MdCancel } from "react-icons/md";
 
 function HotelPhotoGallery(
   this: undefined,
-  { photos }: { photos: ImageType[] }
+  { photos, className }: { photos: ImageType[], className?: string }
 ) {
   const [currenPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -39,10 +39,12 @@ function HotelPhotoGallery(
   const remainingPhotosCount = totalPhotos - maximumVisiblePhotos;
 
   return (
-    <div className="container mx-auto">
-      <div className="grid md:grid-cols-2 relative gap-5 px-3">
-        <div className="h-[540px] relative rounded-2xl overflow-hidden">
-          <div className="hidden md:flex justify-center items-center w-full h-full">
+    <div
+      className={`container mx-auto border-8 border-tertiary-light rounded-2xl w-[60%] h-fit ${className}`}
+    >
+      <div className="grid md:grid-cols-2 relative">
+        <div className="h-full relative rounded-tl-lg overflow-hidden">
+          <div className="hidden md:flex justify-center items-center w-full h-[32rem]">
             <Image
               src={photos[0].url}
               alt={`Room Photo ${currenPhotoIndex + 1}`}
@@ -73,25 +75,22 @@ function HotelPhotoGallery(
           </span>
         </div>
 
-        <div className="hidden md:grid grid-cols-2 h-full gap-5">
+        <div className="hidden md:grid grid-cols-2 h-full gap-0 rounded-tr-lg overflow-hidden">
           {displayPhotos.map((photo, index) => (
-            <div
-              key={index}
-              className="cursor-pointer h-64 rounded-2xl overflow-hidden"
-            >
+            <div key={index} className="cursor-pointer h-64 overflow-hidden">
               <Image
                 width={150}
                 height={150}
                 src={photo.url}
                 alt={`Room Photo ${index + 2}`}
-                className="img scale-animation"
+                className={`img scale-animation `}
               />
             </div>
           ))}
 
           {remainingPhotosCount > 0 && (
             <div
-              className="cursor-pointer relative h-64 rounded-2xl overflow-hidden"
+              className="cursor-pointer relative h-64 overflow-hidden"
               onClick={openModal.bind(this, maximumVisiblePhotos)}
             >
               <Image

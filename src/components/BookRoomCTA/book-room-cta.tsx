@@ -1,6 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
-import DatePicker from "react-datepicker";
+// @refresh reset
+
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
+import BookStageView from "./book-stage-view";
+import { IoChevronBackCircle } from "react-icons/io5";
+import PaymentStageView from "./payment-stage-view";
 
 type Props = {
   checkinDate: Date | null;
@@ -17,7 +21,8 @@ type Props = {
   catatanPelanggan: string;
   isBooked: boolean;
   bookingKamar: () => void;
-  hitungMasaInap: () => number 
+  hitungMasaInap: () => number;
+  nama: string;
 };
 
 function BookRoomCTA(props: Props) {
@@ -36,118 +41,73 @@ function BookRoomCTA(props: Props) {
     catatanPelanggan,
     isBooked,
     bookingKamar,
-    hitungMasaInap
+    hitungMasaInap,
+    nama,
   } = props;
 
   const hargaDiskon = harga - (harga / 100) * diskon;
 
+  const [bookingStage, setBookingStage] = useState<"booking" | "payment">(
+    "payment"
+  );
+
+  useEffect(
+    function () {
+      if (!checkinDate || !checkoutDate || !jumlahOrangDewasa || !jumlahAnak) {
+        setBookingStage("booking");
+      }
+    },
+    [checkinDate, checkoutDate, jumlahAnak, jumlahOrangDewasa]
+  );
+
   return (
-    <div className="px-7 py-6">
-      <h3>
-        <span className={`${diskon ? "text-gray-400" : ""} font-bold text-xl`}>
-          Rp. {harga}
-        </span>
-        {diskon ? (
-          <span className="font-bold text-xl">
-            {" "}
-            | Diskon {diskon}% saat ini,{" "}
-            <span className="text-tertiary-dark">Rp. {hargaDiskon}</span>
-          </span>
-        ) : (
-          ""
-        )}
-      </h3>
+    <div className="px-7 py-6 bg-tertiary-light rounded-2xl w-full relative">
+      <h3 className="text-2xl font-semibold text-center">{nama}</h3>
 
-      <div className="w-full border-b-2 border-b-secondary my-2" />
+      <div className="w-full border-b-2 border-b-secondary mt-2 mb-5" />
 
-      <h4 className="my-8">{catatanPelanggan}</h4>
-
-      <div className="flex">
-        <div className="w-1/2 pr-2">
-          <label
-            htmlFor="check-in-date"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
-          >
-            Check-in
-          </label>
-          <DatePicker
-            selected={checkinDate}
-            onChange={(date) => setCheckinDate(date)}
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-            id="check-in-date"
-            className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary"
+      {bookingStage === "payment" && (
+        <>
+          <IoChevronBackCircle
+            size={50}
+            color="#0C356A"
+            className="absolute left-3 top-2 hover:scale-105 duration-300 transition-all cursor-pointer"
+            onClick={() => setBookingStage("booking")}
           />
-        </div>
-        <div className="w-1/2 pl-2">
-          <label
-            htmlFor="check-out-date"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
-          >
-            Check-out
-          </label>
-          <DatePicker
-            selected={checkoutDate}
-            onChange={(date) => setCheckoutDate(date)}
-            dateFormat="dd/MM/yyyy"
-            disabled={!checkinDate}
-            minDate={hitungMinimumTanggalCheckout()}
-            id="check-out-date"
-            className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary"
-          />
-        </div>
-      </div>
 
-      <div className="flex mt-4">
-        <div className="w-1/2 pr-2">
-          <label
-            htmlFor="adults"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
-          >
-            Dewasa
-          </label>
-          <input
-            type="number"
-            id="adults"
-            value={jumlahOrangDewasa}
-            onChange={(e) => setAdults(+e.target.value)}
-            min={1}
-            max={5}
-            className="w-full border border-gray-300 rounded-lg p-2.5"
+          <PaymentStageView
+            bookingKamar={bookingKamar}
+            checkinDate={checkinDate}
+            checkoutDate={checkoutDate}
+            diskon={diskon}
+            harga={harga}
+            hargaDiskon={hargaDiskon}
+            isBooked={isBooked}
+            jumlahAnak={jumlahAnak}
+            jumlahOrangDewasa={jumlahOrangDewasa}
+            hitungMasaInap={hitungMasaInap}
           />
-        </div>
-        <div className="w-1/2 pl-2">
-          <label
-            htmlFor="children"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
-          >
-            Jumlah Anak
-          </label>
-          <input
-            type="number"
-            id="children"
-            value={jumlahAnak}
-            onChange={(e) => setNoOfChildren(+e.target.value)}
-            min={0}
-            max={3}
-            className="w-full border border-gray-300 rounded-lg p-2.5"
-          />
-        </div>
-      </div>
-
-      {hitungMasaInap() > 0 ? (
-        <p className="mt-3">Total: Rp. {hitungMasaInap() * hargaDiskon}</p>
-      ) : (
-        <></>
+        </>
       )}
 
-      <button
-        disabled={isBooked}
-        onClick={bookingKamar}
-        className="btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed"
-      >
-        {isBooked ? "Booked" : "Book Now"}
-      </button>
+      {bookingStage === "booking" && (
+        <BookStageView
+          checkinDate={checkinDate}
+          setCheckinDate={setCheckinDate}
+          checkoutDate={checkoutDate}
+          catatanPelanggan={catatanPelanggan}
+          hitungMasaInap={hitungMasaInap}
+          hitungMinimumTanggalCheckout={hitungMinimumTanggalCheckout}
+          isBooked={isBooked}
+          jumlahAnak={jumlahAnak}
+          jumlahOrangDewasa={jumlahOrangDewasa}
+          setAdults={setAdults}
+          setCheckoutDate={setCheckoutDate}
+          setNoOfChildren={setNoOfChildren}
+          setBookingStage={setBookingStage}
+          hargaDiskon={hargaDiskon}
+        />
+      )}
     </div>
   );
 }

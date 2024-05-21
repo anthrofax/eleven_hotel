@@ -1,8 +1,6 @@
 import { createClient } from "next-sanity";
 
 const sanityClient = createClient({
-
-
   projectId: "5x9vlanc",
   dataset: "production",
   useCdn: true,

@@ -15,6 +15,8 @@ function Page() {
 
   function filterRoom(rooms: Room[]) {
     return rooms?.filter((room) => {
+      if (!room.nama) return false;
+
       // 1. Filter berdasarkan tipe kamar
       if (
         roomType &&

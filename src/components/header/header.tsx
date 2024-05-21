@@ -62,17 +62,17 @@ function Header() {
         </ul>
       </div>
 
-      <ul className="flex items-center justify-between w-full md:w-1/3 mt-4">
-        <li className="hover:-translate-y-2 duration-500 transition-all">
+      <ul className="flex items-center justify-between md:justify-end w-full mt-4 md:gap-5">
+        <li className="hover:-translate-y-2 duration-500 transition-all text-base md:text-xl">
           <Link href="/">Home</Link>
         </li>
-        <li className="hover:-translate-y-2 duration-500 transition-all">
-          <Link href="/daftar-kamar">Rooms</Link>
+        <li className="hover:-translate-y-2 duration-500 transition-all text-base md:text-lg lg:text-xl">
+          <Link href="/rooms">Rooms</Link>
         </li>
-        <li className="hover:-translate-y-2 duration-500 transition-all">
-          <Link href="/contacts">Contact</Link>
+        <li className="hover:-translate-y-2 duration-500 transition-all text-base md:text-lg lg:text-xl">
+          <Link href="/contact">Contact</Link>
         </li>
-        <li className="hover:-translate-y-2 duration-500 transition-all">
+        <li className="hover:-translate-y-2 duration-500 transition-all text-base md:text-lg lg:text-xl">
           <Link href="/about-us">About Us</Link>
         </li>
       </ul>
