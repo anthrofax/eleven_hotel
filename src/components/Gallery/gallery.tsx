@@ -73,35 +73,35 @@ const Gallery = () => {
             <Image
               alt="gallery"
               className="h-40 max-w-40 rounded-full"
-              src="/images/hero-3.jpeg"
+              src="/images/companies/Ellipse 8.png"
               width={200}
               height={200}
             />
             <Image
               alt="gallery"
               className="h-40 max-w-40 rounded-full"
-              src="/images/hero-3.jpeg"
+              src="/images/companies/Ellipse 9.png"
               width={200}
               height={200}
             />
             <Image
               alt="gallery"
               className="h-40 max-w-40 rounded-full"
-              src="/images/hero-3.jpeg"
+              src="/images/companies/Ellipse 10.png"
               width={200}
               height={200}
             />
             <Image
               alt="gallery"
               className="h-40 max-w-40 rounded-full"
-              src="/images/hero-3.jpeg"
+              src="/images/companies/Ellipse 11.png"
               width={200}
               height={200}
             />
             <Image
               alt="gallery"
               className="h-40 max-w-40 rounded-full"
-              src="/images/hero-3.jpeg"
+              src="/images/companies/Ellipse 8.png"
               width={200}
               height={200}
             />
