@@ -3,27 +3,23 @@ import axios from "axios";
 import useSWR from "swr";
 import Rating from "../Rating/rating";
 
-function RoomReview({ idKamar }: { idKamar: string }) {
-  const fetchRoomReviews = async () => {
-    const { data } = await axios.get<Ulasan[]>(`/api/room-reviews/${idKamar}`);
-
-    return data;
-  };
-
-  const {
-    data: roomReviews,
-    error,
-    isLoading,
-  } = useSWR("/api/room-reviews", fetchRoomReviews);
-
-  if (error) throw new Error("Cannot fetch data");
-  if (typeof roomReviews === "undefined" && !isLoading)
+function RoomReview({
+  roomReviews,
+  reviewError,
+  reviewIsLoading,
+}: {
+  roomReviews: Ulasan[];
+  reviewError: any;
+  reviewIsLoading: any;
+}) {
+  if (reviewError) throw new Error("Cannot fetch data");
+  if (typeof roomReviews === "undefined" && !reviewIsLoading)
     throw new Error("Cannot fetch data");
 
   return (
     <>
       {roomReviews &&
-        roomReviews.map((review) => (
+        roomReviews.map((review: Ulasan) => (
           <div
             className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg"
             key={review._id}

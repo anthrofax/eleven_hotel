@@ -3,33 +3,22 @@ import { MdMan } from "react-icons/md";
 import { LuBaby } from "react-icons/lu";
 import { id } from "date-fns/locale/id";
 import { format } from "date-fns";
+import { useBookingContext } from "@/context/booking-context";
 
-type Props = {
-  checkinDate: Date | null;
-  checkoutDate: Date | null;
-  harga: number;
-  diskon: number;
-  jumlahOrangDewasa: number;
-  jumlahAnak: number;
-  isBooked: boolean;
-  hargaDiskon: number;
-  bookingKamar: () => void;
-  hitungMasaInap: () => number;
-};
-
-function PaymentStageView(props: Props) {
+function PaymentStageView() {
   const {
     checkinDate,
     checkoutDate,
     jumlahAnak,
     jumlahOrangDewasa,
-    diskon,
-    isBooked,
-    harga,
+    room,
     hargaDiskon,
     bookingKamar,
+    slug,
     hitungMasaInap,
-  } = props;
+  } = useBookingContext();
+
+  const { diskon, isBooked, harga } = room;
 
   let Rupiah = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -70,7 +59,7 @@ function PaymentStageView(props: Props) {
           <p>Harga </p>
           <h3>
             <span className={`font-thin  text-xl`}>
-               {Rupiah.format(hitungMasaInap() * harga)}
+              {Rupiah.format(hitungMasaInap() * harga)}
             </span>
           </h3>
         </div>
@@ -85,7 +74,7 @@ function PaymentStageView(props: Props) {
             {" "}
             | Diskon {diskon}% saat ini,{" "}
             <span className="text-tertiary-dark">
-               {Rupiah.format((harga / 100) * diskon)}
+              {Rupiah.format((harga / 100) * diskon)}
             </span>
           </span>
         </div>
@@ -96,7 +85,7 @@ function PaymentStageView(props: Props) {
           <p>Harga Total </p>
           <h3>
             <span className={`font-thin  text-xl`}>
-               {Rupiah.format(hitungMasaInap() * hargaDiskon)}
+              {Rupiah.format(hitungMasaInap() * hargaDiskon)}
             </span>
           </h3>
         </div>
@@ -104,7 +93,7 @@ function PaymentStageView(props: Props) {
 
       <button
         disabled={isBooked}
-        onClick={bookingKamar}
+        onClick={() => bookingKamar(slug)}
         className="btn-primary w-3/4 mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed rounded-full container mx-auto flex items-center justify-center text-sm"
       >
         {isBooked ? "Booked" : "Payment Now!"}

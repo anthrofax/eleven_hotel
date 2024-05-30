@@ -79,3 +79,5 @@ export const getRoomReviewsQuery = groq`*[_type == "ulasan" && kamarHotel._ref =
     },
     ratingPengguna
 }`;
+
+// export const getRoomReviews = groq`*[_type == "ulasan" && kamarHotel._ref == $roomId] {

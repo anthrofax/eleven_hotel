@@ -26,3 +26,6 @@
   @apply text-sm md:text-base;
 }
 
+.booking-btn {
+  @apply  w-1/2 mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed px-3 py-2 md:py-5 rounded-lg md:rounded-2xl shadow-sm shadow-primary text-white font-bold text-base hover:scale-105 duration-300 transition-all;
+}

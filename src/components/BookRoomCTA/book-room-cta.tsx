@@ -5,51 +5,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import BookStageView from "./book-stage-view";
 import { IoChevronBackCircle } from "react-icons/io5";
 import PaymentStageView from "./payment-stage-view";
+import { useBookingContext } from "@/context/booking-context";
 
-type Props = {
-  checkinDate: Date | null;
-  setCheckinDate: Dispatch<SetStateAction<Date | null>>;
-  checkoutDate: Date | null;
-  setCheckoutDate: Dispatch<SetStateAction<Date | null>>;
-  setAdults: Dispatch<SetStateAction<number>>;
-  setNoOfChildren: Dispatch<SetStateAction<number>>;
-  hitungMinimumTanggalCheckout: () => Date | null;
-  harga: number;
-  diskon: number;
-  jumlahOrangDewasa: number;
-  jumlahAnak: number;
-  catatanPelanggan: string;
-  isBooked: boolean;
-  bookingKamar: () => void;
-  hitungMasaInap: () => number;
-  nama: string;
-};
+function BookRoomCTA() {
+  const { checkinDate, checkoutDate, room, setBookingStage, bookingStage } = useBookingContext();
 
-function BookRoomCTA(props: Props) {
-  const {
-    checkinDate,
-    setCheckinDate,
-    checkoutDate,
-    setCheckoutDate,
-    setAdults,
-    setNoOfChildren,
-    hitungMinimumTanggalCheckout,
-    harga,
-    diskon,
-    jumlahOrangDewasa,
-    jumlahAnak,
-    catatanPelanggan,
-    isBooked,
-    bookingKamar,
-    hitungMasaInap,
-    nama,
-  } = props;
+  const { jumlahOrangDewasa, jumlahAnak, nama } = room;
 
-  const hargaDiskon = harga - (harga / 100) * diskon;
-
-  const [bookingStage, setBookingStage] = useState<"booking" | "payment">(
-    "payment"
-  );
 
   useEffect(
     function () {
@@ -57,7 +19,7 @@ function BookRoomCTA(props: Props) {
         setBookingStage("booking");
       }
     },
-    [checkinDate, checkoutDate, jumlahAnak, jumlahOrangDewasa]
+    [checkinDate, checkoutDate, jumlahAnak, jumlahOrangDewasa, setBookingStage]
   );
 
   return (
@@ -75,38 +37,12 @@ function BookRoomCTA(props: Props) {
             onClick={() => setBookingStage("booking")}
           />
 
-          <PaymentStageView
-            bookingKamar={bookingKamar}
-            checkinDate={checkinDate}
-            checkoutDate={checkoutDate}
-            diskon={diskon}
-            harga={harga}
-            hargaDiskon={hargaDiskon}
-            isBooked={isBooked}
-            jumlahAnak={jumlahAnak}
-            jumlahOrangDewasa={jumlahOrangDewasa}
-            hitungMasaInap={hitungMasaInap}
-          />
+          <PaymentStageView />
         </>
       )}
 
       {bookingStage === "booking" && (
-        <BookStageView
-          checkinDate={checkinDate}
-          setCheckinDate={setCheckinDate}
-          checkoutDate={checkoutDate}
-          catatanPelanggan={catatanPelanggan}
-          hitungMasaInap={hitungMasaInap}
-          hitungMinimumTanggalCheckout={hitungMinimumTanggalCheckout}
-          isBooked={isBooked}
-          jumlahAnak={jumlahAnak}
-          jumlahOrangDewasa={jumlahOrangDewasa}
-          setAdults={setAdults}
-          setCheckoutDate={setCheckoutDate}
-          setNoOfChildren={setNoOfChildren}
-          setBookingStage={setBookingStage}
-          hargaDiskon={hargaDiskon}
-        />
+        <BookStageView  />
       )}
     </div>
   );

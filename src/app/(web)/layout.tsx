@@ -6,6 +6,7 @@ import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
 import AuthProvider from "@/components/AuthProvider/auth-provider";
 import { Toaster } from "react-hot-toast";
+import { BookingContextProvider } from "@/context/booking-context";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -39,7 +40,7 @@ export default function RootLayout({
             <Toaster />
             <main className="font-normal">
               <Header />
-              {children}
+              <BookingContextProvider>{children}</BookingContextProvider>
               <Footer />
             </main>
           </ThemeContextProvider>

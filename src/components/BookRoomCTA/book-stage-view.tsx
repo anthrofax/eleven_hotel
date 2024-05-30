@@ -4,41 +4,28 @@ import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import { Dispatch, SetStateAction } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { useBookingContext } from "@/context/booking-context";
 
-type Props = {
-  checkinDate: Date | null;
-  setCheckinDate: Dispatch<SetStateAction<Date | null>>;
-  checkoutDate: Date | null;
-  setCheckoutDate: Dispatch<SetStateAction<Date | null>>;
-  setAdults: Dispatch<SetStateAction<number>>;
-  setNoOfChildren: Dispatch<SetStateAction<number>>;
-  hitungMinimumTanggalCheckout: () => Date | null;
-  jumlahOrangDewasa: number;
-  jumlahAnak: number;
-  catatanPelanggan: string;
-  isBooked: boolean;
-  hitungMasaInap: () => number;
-  setBookingStage: Dispatch<SetStateAction<"booking" | "payment">>;
-  hargaDiskon: number;
-};
-
-function BookStageView(props: Props) {
+function BookStageView() {
   const {
     checkinDate,
     setCheckinDate,
     checkoutDate,
     setCheckoutDate,
-    setAdults,
-    setNoOfChildren,
+    setDataJumlahOrangDewasa,
+    setDataJumlahAnak,
     hitungMinimumTanggalCheckout,
-    jumlahOrangDewasa,
-    jumlahAnak,
-    catatanPelanggan,
-    isBooked,
-    hitungMasaInap,
+    room,
+    slug,
     setBookingStage,
-    hargaDiskon,
-  } = props;
+    dataJumlahAnak,
+    dataJumlahOrangDewasa
+  } = useBookingContext();
+
+  const { jumlahOrangDewasa, jumlahAnak, catatanPelanggan, isBooked } = room;
+
+  const router = useRouter();
 
   return (
     <>
@@ -106,7 +93,7 @@ function BookStageView(props: Props) {
               type="number"
               id="adults"
               value={jumlahOrangDewasa}
-              onChange={(e) => setAdults(+e.target.value)}
+              onChange={(e) => setDataJumlahOrangDewasa(+e.target.value)}
               min={1}
               max={5}
               className="w-full border border-gray-300 rounded-lg p-2.5 bg-tertiary-superLight pl-8 "
@@ -132,7 +119,7 @@ function BookStageView(props: Props) {
               type="number"
               id="children"
               value={jumlahAnak}
-              onChange={(e) => setNoOfChildren(+e.target.value)}
+              onChange={(e) => setDataJumlahAnak(+e.target.value)}
               min={0}
               max={3}
               className="w-full border border-gray-300 rounded-lg p-2.5 bg-tertiary-superLight pl-10 "
@@ -141,18 +128,32 @@ function BookStageView(props: Props) {
         </div>
       </div>
 
-      <button
-        disabled={isBooked}
-        onClick={() => {
-          if (!checkinDate || !checkoutDate || !jumlahOrangDewasa)
-            return toast.error("Mohon isi data booking terlebih dahulu");
+      <div className="flex gap-3">
+        <button
+          className="booking-btn bg-secondary"
+          disabled={isBooked}
+          onClick={() => {
+            if (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa)
+              return toast.error("Mohon isi data booking terlebih dahulu");
 
-          setBookingStage("payment");
-        }}
-        className="btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed"
-      >
-        {isBooked ? "Booked" : "Booking Now!"}
-      </button>
+            router.push(`/rooms/${slug}/layanan-tambahan`);
+          }}
+        >
+          Booking dengan layanan tambahan
+        </button>
+        <button
+          disabled={isBooked}
+          onClick={() => {
+            if (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa)
+              return toast.error("Mohon isi data booking terlebih dahulu");
+
+            setBookingStage("payment");
+          }}
+          className="booking-btn bg-primary"
+        >
+          {isBooked ? "Booked" : "Booking Reguler"}
+        </button>
+      </div>
     </>
   );
 }
