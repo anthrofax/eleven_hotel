@@ -9,8 +9,8 @@ function PaymentStageView() {
   const {
     checkinDate,
     checkoutDate,
-    jumlahAnak,
-    jumlahOrangDewasa,
+    dataJumlahAnak,
+    dataJumlahOrangDewasa,
     room,
     hargaDiskon,
     bookingKamar,
@@ -44,13 +44,13 @@ function PaymentStageView() {
 
       <div className="flex gap-1">
         <MdMan size={20} color="#0C356A" />{" "}
-        <span>{jumlahOrangDewasa} Orang Dewasa</span>
+        <span>{dataJumlahOrangDewasa} Orang Dewasa</span>
       </div>
 
-      {jumlahAnak > 0 && (
+      {dataJumlahAnak > 0 && (
         <div className="flex gap-1 mt-3">
           <LuBaby size={20} color="#0C356A" />{" "}
-          <span>{jumlahAnak} Anak Kecil</span>
+          <span>{dataJumlahAnak} Anak Kecil</span>
         </div>
       )}
 
