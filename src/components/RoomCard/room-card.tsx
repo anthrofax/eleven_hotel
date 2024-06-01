@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Room } from "@/models/room";
 import Link from "next/link";
+import { Rupiah } from "@/helper/formatCurrency";
 
 type Props = {
   room: Room;
@@ -9,11 +10,6 @@ type Props = {
 
 function RoomCard({ room }: Props) {
   const { coverGambar, nama, harga, type, deskripsi, slug, isBooked } = room;
-
-  let Rupiah = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-  });
 
   if (!nama) return null;
 

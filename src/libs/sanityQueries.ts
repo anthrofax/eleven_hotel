@@ -80,4 +80,9 @@ export const getRoomReviewsQuery = groq`*[_type == "ulasan" && kamarHotel._ref =
     ratingPengguna
 }`;
 
-// export const getRoomReviews = groq`*[_type == "ulasan" && kamarHotel._ref == $roomId] {
+export const getLayananTambahan = groq`*[_type == "layanan-tambahan"] {
+    deskripsi,
+    harga,
+    nama,
+    "gambar": gambar.asset->url
+}`;

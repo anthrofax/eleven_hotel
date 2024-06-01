@@ -4,6 +4,8 @@ import * as queries from "./sanityQueries";
 import axios from "axios";
 import { Booking } from "@/models/booking";
 import { CreateReviewDto, Ulasan, UpdateReviewDto } from "@/models/ulasan";
+import LayananTambahan from "@/models/layananTambahan";
+
 
 export async function getFeaturedRoom() {
   const result = await sanityClient.fetch<Room>(
@@ -229,8 +231,18 @@ export async function getRoomReviews(roomId: string) {
     {
       roomId,
     },
-    { cache: "no-cache" }
+    { cache: "no-store" }
   );
 
   return result;
+}
+
+export async function getLayananTambahan() {
+  const result = await sanityClient.fetch<LayananTambahan[]>(
+    queries.getLayananTambahan,
+    {},
+    { cache: "no-cache" }
+  );
+
+  return result
 }

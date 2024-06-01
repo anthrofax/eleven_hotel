@@ -1,3 +1,4 @@
+import { Rupiah } from "@/helper/formatCurrency";
 import { Booking } from "@/models/booking";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
@@ -12,11 +13,6 @@ function Table({
   toggleRatingModal: () => void;
 }) {
   const router = useRouter();
-
-  let Rupiah = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-  });
 
 
   return (

@@ -4,6 +4,7 @@ import { LuBaby } from "react-icons/lu";
 import { id } from "date-fns/locale/id";
 import { format } from "date-fns";
 import { useBookingContext } from "@/context/booking-context";
+import { Rupiah } from "@/helper/formatCurrency";
 
 function PaymentStageView() {
   const {
@@ -19,11 +20,6 @@ function PaymentStageView() {
   } = useBookingContext();
 
   const { diskon, isBooked, harga } = room;
-
-  let Rupiah = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-  });
 
   const locale = id;
 

@@ -72,7 +72,7 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
   const {
     data: room,
     error,
-    isLoading,
+    isValidating: isLoading,
   } = useSWR("/api/room", getRoom.bind(null, slug));
 
   if (room) hargaDiskon = room.harga - (room.harga / 100) * room.diskon;
