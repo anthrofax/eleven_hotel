@@ -48,7 +48,6 @@ export async function POST(req: Request, res: Response) {
       roomId
     );
 
-    console.log(alreadyExists);
 
     let data;
 

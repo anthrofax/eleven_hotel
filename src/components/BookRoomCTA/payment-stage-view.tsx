@@ -5,17 +5,23 @@ import { id } from "date-fns/locale/id";
 import { format } from "date-fns";
 import { useBookingContext } from "@/context/booking-context";
 import { Rupiah } from "@/helper/formatCurrency";
+import { Room } from "@/models/room";
 
-function PaymentStageView() {
+function PaymentStageView({
+  room,
+  slug,
+  hargaDiskon,
+}: {
+  room: Room;
+  slug: string;
+  hargaDiskon: number;
+}) {
   const {
     checkinDate,
     checkoutDate,
     dataJumlahAnak,
     dataJumlahOrangDewasa,
-    room,
-    hargaDiskon,
     bookingKamar,
-    slug,
     hitungMasaInap,
   } = useBookingContext();
 

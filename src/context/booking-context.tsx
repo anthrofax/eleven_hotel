@@ -2,6 +2,7 @@
 
 import { getRoom } from "@/libs/apis";
 import { getStripe } from "@/libs/stripe";
+import LayananTambahan from "@/models/layananTambahan";
 import { Room } from "@/models/room";
 import axios from "axios";
 import { useParams } from "next/navigation";
@@ -9,6 +10,12 @@ import React, { Dispatch, SetStateAction } from "react";
 import { createContext, useState, useContext } from "react";
 import toast from "react-hot-toast";
 import useSWR from "swr";
+
+type CartItemType = {
+  qty: number;
+  id: string,
+  harga: number
+}
 
 type BookingContextType = {
   checkinDate: Date | null;
@@ -19,16 +26,15 @@ type BookingContextType = {
   setDataJumlahOrangDewasa: Dispatch<SetStateAction<number>>;
   dataJumlahAnak: number;
   setDataJumlahAnak: Dispatch<SetStateAction<number>>;
-  room: any;
   hitungMasaInap: () => number;
   hitungMinimumTanggalCheckout: () => Date | null;
   bookingKamar: (slugKamar: string) => void;
-  slug: string;
-  error: boolean;
-  isLoading: boolean;
-  hargaDiskon: number;
   bookingStage: "booking" | "payment";
   setBookingStage: Dispatch<SetStateAction<"booking" | "payment">>;
+  hargaLayananTambahan: number;
+  setHargaLayananTambahan: Dispatch<SetStateAction<number>>;
+  bookingCart: CartItemType[];
+  setBookingCart: Dispatch<SetStateAction<CartItemType[]>>;
 };
 
 const BookingContext = createContext<BookingContextType>({
@@ -40,7 +46,6 @@ const BookingContext = createContext<BookingContextType>({
   setDataJumlahOrangDewasa: function () {},
   dataJumlahAnak: 0,
   setDataJumlahAnak: function () {},
-  room: {},
   hitungMasaInap: function () {
     return 0;
   },
@@ -48,34 +53,25 @@ const BookingContext = createContext<BookingContextType>({
     return null;
   },
   bookingKamar: function () {},
-  slug: "",
-  error: false,
-  isLoading: false,
-  hargaDiskon: 0,
   bookingStage: "booking",
   setBookingStage: function () {},
+  hargaLayananTambahan: 0,
+  setHargaLayananTambahan: function () {},
+  bookingCart: [],
+  setBookingCart: function () {},
 });
 
 function BookingContextProvider({ children }: { children: React.ReactNode }) {
-  let { slug } = useParams();
   const [checkinDate, setCheckinDate] = useState<Date | null>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
   const [dataJumlahOrangDewasa, setDataJumlahOrangDewasa] = useState<number>(1);
   const [dataJumlahAnak, setDataJumlahAnak] = useState<number>(0);
   const [bookingStage, setBookingStage] = useState<"booking" | "payment">(
-    "payment"
+    "booking"
   );
-  let hargaDiskon = 0;
+  const [hargaLayananTambahan, setHargaLayananTambahan] = useState(0);
+  const [bookingCart, setBookingCart] = useState<CartItemType[]>([]);
 
-  if (Array.isArray(slug)) slug = slug[0];
-
-  const {
-    data: room,
-    error,
-    isValidating: isLoading,
-  } = useSWR("/api/room", getRoom.bind(null, slug));
-
-  if (room) hargaDiskon = room.harga - (room.harga / 100) * room.diskon;
 
   function hitungMasaInap(): number {
     if (!checkinDate || !checkoutDate) return 0;
@@ -137,7 +133,6 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <BookingContext.Provider
       value={{
-        slug,
         checkinDate,
         setCheckinDate,
         checkoutDate,
@@ -146,15 +141,15 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
         dataJumlahOrangDewasa,
         setDataJumlahAnak,
         setDataJumlahOrangDewasa,
-        room,
         hitungMasaInap,
         hitungMinimumTanggalCheckout,
         bookingKamar,
-        error,
-        isLoading,
-        hargaDiskon,
         bookingStage,
-        setBookingStage
+        setBookingStage,
+        hargaLayananTambahan,
+        setHargaLayananTambahan,
+        bookingCart,
+        setBookingCart,
       }}
     >
       {children}

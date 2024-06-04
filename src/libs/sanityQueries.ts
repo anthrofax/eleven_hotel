@@ -84,5 +84,6 @@ export const getLayananTambahan = groq`*[_type == "layanan-tambahan"] {
     deskripsi,
     harga,
     nama,
-    "gambar": gambar.asset->url
+    "gambar": gambar.asset->url,
+    _id
 }`;

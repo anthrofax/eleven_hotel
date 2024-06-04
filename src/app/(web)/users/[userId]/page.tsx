@@ -47,7 +47,6 @@ function Page({ params }: { params: any }) {
         roomId,
       });
       
-      console.log(data);
       toast.success("Berhasil memberikan ulasan");
     } catch (error) {
       console.log(error);

@@ -6,25 +6,47 @@ import BookStageView from "./book-stage-view";
 import { IoChevronBackCircle } from "react-icons/io5";
 import PaymentStageView from "./payment-stage-view";
 import { useBookingContext } from "@/context/booking-context";
+import { Room } from "@/models/room";
 
-function BookRoomCTA() {
-  const { checkinDate, checkoutDate, room, setBookingStage, bookingStage } = useBookingContext();
-
-  const { jumlahOrangDewasa, jumlahAnak, nama } = room;
-
+function BookRoomCTA({
+  room,
+  slug,
+  hargaDiskon,
+}: {
+  room: Room;
+  slug: string;
+  hargaDiskon: number;
+}) {
+  const {
+    checkinDate,
+    checkoutDate,
+    setBookingStage,
+    bookingStage,
+    dataJumlahOrangDewasa,
+  } = useBookingContext();
 
   useEffect(
     function () {
-      if (!checkinDate || !checkoutDate || !jumlahOrangDewasa || !jumlahAnak) {
+      if (
+        (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa) &&
+        bookingStage === "payment"
+      ) {
+        console.log("test");
         setBookingStage("booking");
       }
     },
-    [checkinDate, checkoutDate, jumlahAnak, jumlahOrangDewasa, setBookingStage]
+    [
+      checkinDate,
+      checkoutDate,
+      dataJumlahOrangDewasa,
+      setBookingStage,
+      bookingStage,
+    ]
   );
 
   return (
     <div className="px-7 py-6 bg-tertiary-light rounded-2xl w-full relative">
-      <h3 className="text-2xl font-semibold text-center">{nama}</h3>
+      <h3 className="text-2xl font-semibold text-center">{room!.nama}</h3>
 
       <div className="w-full border-b-2 border-b-secondary mt-2 mb-5" />
 
@@ -37,13 +59,11 @@ function BookRoomCTA() {
             onClick={() => setBookingStage("booking")}
           />
 
-          <PaymentStageView />
+          <PaymentStageView hargaDiskon={hargaDiskon} room={room} slug={slug} />
         </>
       )}
 
-      {bookingStage === "booking" && (
-        <BookStageView  />
-      )}
+      {bookingStage === "booking" && <BookStageView room={room} slug={slug} />}
     </div>
   );
 }

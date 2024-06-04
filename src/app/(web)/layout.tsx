@@ -40,7 +40,7 @@ export default function RootLayout({
             <Toaster />
             <main className="font-normal">
               <Header />
-              <BookingContextProvider>{children}</BookingContextProvider>
+                <BookingContextProvider>{children}</BookingContextProvider>
               <Footer />
             </main>
           </ThemeContextProvider>

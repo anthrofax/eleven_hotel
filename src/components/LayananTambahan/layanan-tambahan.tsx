@@ -3,63 +3,133 @@ import { FaPlus } from "react-icons/fa";
 import Image from "next/image";
 import LayananTambahanType from "@/models/layananTambahan";
 import { Rupiah } from "@/helper/formatCurrency";
+import { useBookingContext } from "@/context/booking-context";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 function LayananTambahan({
   nama,
   gambar,
   harga,
   deskripsi,
+  _id,
 }: LayananTambahanType) {
+  const {
+    bookingCart,
+    setBookingCart,
+    dataJumlahAnak,
+    dataJumlahOrangDewasa,
+    checkinDate,
+    checkoutDate,
+  } = useBookingContext();
+  const itemInCart = bookingCart.find((item) => item.id === _id);
+  const router = useRouter();
+
+  // useEffect(
+  //   function () {
+  //     if (
+  //       !dataJumlahAnak ||
+  //       !dataJumlahOrangDewasa ||
+  //       !checkinDate ||
+  //       !checkoutDate
+  //     ) {
+  //       router.back();
+  //     }
+  //     console.log(dataJumlahAnak)
+  //     console.log(dataJumlahOrangDewasa)
+  //     console.log(checkinDate)
+  //     console.log(checkoutDate)
+  //   },
+  //   [dataJumlahAnak, dataJumlahOrangDewasa, checkinDate, checkoutDate]
+  // );
+
+  function handleIncItem() {
+    setBookingCart((cart) => {
+      if (!itemInCart) {
+        return [
+          ...cart,
+          {
+            harga,
+            id: _id,
+            qty: 1,
+          },
+        ];
+      }
+
+      return [
+        ...cart.filter((item) => item.id !== _id),
+        {
+          harga,
+          id: _id,
+          qty: itemInCart.qty + 1,
+        },
+      ];
+    });
+  }
+
+  function handleDecItem() {
+    if (!itemInCart)
+      return toast.error("Anda belum menambahkan item ini ke keranjang");
+
+    setBookingCart((cart) => {
+      if (itemInCart.qty === 1) {
+        return cart.filter((item) => item.id !== _id);
+      }
+
+      return [
+        {
+          harga,
+          id: _id,
+          qty: itemInCart.qty - 1,
+        },
+        ...cart.filter((item) => item.id !== _id),
+      ];
+    });
+  }
+
   return (
-    <div className="grid gap-3 grid-cols-4">
-      <div className="bg-tertiary-light col-span-3 grid grid-cols-4 p-3 rounded-xl h-60">
-        <div className="col-span-1 relative aspect-square self-center rounded-xl overflow-hidden">
-          <Image src={gambar} fill alt="food image" />
-        </div>
-
-        <div className="col-span-3 flex flex-col py-3 px-5">
-          <div className="flex justify-between w-full text-2xl font-bold">
-            <h3>{nama}</h3>
-            <h3>{Rupiah.format(harga)}</h3>
-          </div>
-
-          <div className="mt-5">{deskripsi}</div>
-        </div>
+    <div className="bg-tertiary-light grid grid-cols-4 p-3 rounded-xl h-80">
+      <div className="col-span-1 relative aspect-square rounded-xl overflow-hidden h-[90%] place-self-center">
+        <Image src={gambar} fill alt="food image" />
       </div>
 
-      <div className="bg-tertiary-light col-span-1 flex flex-col gap-1 p-5 rounded-xl justify-between">
-        <div className="flex flex-col gap-1 items-end">
-          <div className="flex gap-3 justify-end items-center">
-            <label htmlFor="">Jumlah</label>
-
-            <div className="flex gap-3 bg-tertiary-superLight py-1 px-2 rounded-lg items-center">
-              <button className="aspect-auto w-[25%]">
-                <TiMinus />
-              </button>
-              <span className="bg-primary text-white rounded-full py-1 px-3 flex items-center justify-center">
-                0
-              </span>
-              <button className="aspect-auto w-[25%]">
-                <FaPlus />
-              </button>
-            </div>
-          </div>
-
-          <select
-            name=""
-            id=""
-            className="mt-3 w-[80%] bg-tertiary-superLight rounded-xl borded-none py-1 px-2"
-          >
-            <option value="Pilih kamar">Pilih kamar</option>
-            <option value="Pilih kamar">Kamar 1</option>
-          </select>
+      <div className="col-span-3 flex flex-col py-3 px-5">
+        <div className="flex justify-between w-full text-2xl font-bold">
+          <h3>{nama}</h3>
+          <h3>{Rupiah.format(harga)}</h3>
         </div>
 
-        <div className="flex flex-col gap-1 mt-3">
-          <h3 className="text-lg font-bold">Total: Rp.150.000,00</h3>
-          <button className="bg-primary py-3 w-full text-white rounded-full">
-            Booking now!
-          </button>
+        <div className="mt-5">{deskripsi}</div>
+
+        <div className="flex mt-7 justify-end">
+          <div className="bg-tertiary-superLight px-7 py-3 rounded-xl w-fit flex flex-col gap-1">
+            <div className="flex gap-3 justify-end items-center">
+              <label htmlFor="">Jumlah</label>
+
+              <div className="flex gap-3 bg-tertiary-dark py-1 px-2 rounded-lg items-center">
+                <button
+                  className="aspect-auto w-[25%] transition-all hover:bg-primary/50 p-1 rounded-full group flex items-center justify-center"
+                  onClick={handleDecItem}
+                >
+                  <TiMinus className="group-hover:text-white transition-all" />
+                </button>
+                <span className="bg-primary text-white rounded-full py-1 px-3 flex items-center justify-center">
+                  {bookingCart.find((item) => item.id === _id)?.qty || 0}
+                </span>
+                <button
+                  className="aspect-auto w-[25%] transition-all hover:bg-primary/50 p-1 rounded-full group flex items-center justify-center"
+                  onClick={handleIncItem}
+                >
+                  <FaPlus className="group-hover:text-white transition-all" />
+                </button>
+              </div>
+            </div>
+
+            <h3 className="text-lg font-bold text-end mt-3">
+              {` Total: ${Rupiah.format(itemInCart ? itemInCart?.harga * itemInCart?.qty : 0)}`}
+            </h3>
+          </div>
         </div>
       </div>
     </div>

@@ -2,12 +2,12 @@ import { MdMan } from "react-icons/md";
 import { LuBaby } from "react-icons/lu";
 import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
-import { Dispatch, SetStateAction } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { useBookingContext } from "@/context/booking-context";
+import { Room } from "@/models/room";
 
-function BookStageView() {
+function BookStageView({ room, slug }: { room: Room; slug: string }) {
   const {
     checkinDate,
     setCheckinDate,
@@ -16,20 +16,16 @@ function BookStageView() {
     setDataJumlahOrangDewasa,
     setDataJumlahAnak,
     hitungMinimumTanggalCheckout,
-    room,
-    slug,
     setBookingStage,
     dataJumlahAnak,
-    dataJumlahOrangDewasa
+    dataJumlahOrangDewasa,
   } = useBookingContext();
-
-  const { jumlahOrangDewasa, jumlahAnak, catatanPelanggan, isBooked } = room;
 
   const router = useRouter();
 
   return (
     <>
-      <h4 className="my-8">{catatanPelanggan}</h4>
+      <h4 className="my-8">{room.catatanPelanggan}</h4>
 
       <div className="flex justify-between gap-5">
         <div className="w-1/2 pr-2 ">
@@ -92,7 +88,7 @@ function BookStageView() {
             <input
               type="number"
               id="adults"
-              value={jumlahOrangDewasa}
+              value={dataJumlahOrangDewasa}
               onChange={(e) => setDataJumlahOrangDewasa(+e.target.value)}
               min={1}
               max={5}
@@ -118,7 +114,7 @@ function BookStageView() {
             <input
               type="number"
               id="children"
-              value={jumlahAnak}
+              value={dataJumlahAnak}
               onChange={(e) => setDataJumlahAnak(+e.target.value)}
               min={0}
               max={3}
@@ -131,7 +127,7 @@ function BookStageView() {
       <div className="flex gap-3">
         <button
           className="booking-btn bg-secondary"
-          disabled={isBooked}
+          disabled={room.isBooked}
           onClick={() => {
             if (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa)
               return toast.error("Mohon isi data booking terlebih dahulu");
@@ -142,7 +138,7 @@ function BookStageView() {
           Booking dengan layanan tambahan
         </button>
         <button
-          disabled={isBooked}
+          disabled={room.isBooked}
           onClick={() => {
             if (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa)
               return toast.error("Mohon isi data booking terlebih dahulu");
@@ -151,7 +147,7 @@ function BookStageView() {
           }}
           className="booking-btn bg-primary"
         >
-          {isBooked ? "Booked" : "Booking Reguler"}
+          {room.isBooked ? "Booked" : "Booking Reguler"}
         </button>
       </div>
     </>
