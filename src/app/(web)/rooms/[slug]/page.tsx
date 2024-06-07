@@ -11,12 +11,17 @@ import { GiSmokeBomb } from "react-icons/gi";
 import BookRoomCTA from "@/components/BookRoomCTA/book-room-cta";
 import RoomReview from "@/components/RoomReview/room-review";
 import { useBookingContext } from "@/context/booking-context";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import useDetailRoom from "@/hooks/useDetailRoom";
 import Error from "../../error";
+import { Ulasan } from "@/models/ulasan";
 
 function Page() {
+  const [isReviewLoading, setIsReviewLoading] = useState(false);
+  const [reviewError, setReviewError] = useState<null | string>(null);
+  const roomReviews = useRef<Ulasan[]>();
+
   let { slug } = useParams();
   const {
     bookingCart,
@@ -45,12 +50,28 @@ function Page() {
     [bookingCart, bookingStage]
   );
 
-  const {
-    data: roomReviews,
-    error: reviewError,
-    isValidating: reviewIsValidating,
-    isLoading: reviewIsLoading,
-  } = useSWR("/api/room-reviews", getRoomReviews.bind(null, room?._id));
+  useEffect(
+    function () {
+      roomReviews.current = undefined;
+      async function getReview() {
+        try {
+          setIsReviewLoading(true);
+          if (!room) return;
+
+          roomReviews.current = await getRoomReviews(room._id);
+        } catch (err) {
+          console.log("Error Fetch Review: " + err);
+          setReviewError("Fetch data review Error");
+        } finally {
+          setIsReviewLoading(false);
+          setReviewError(null);
+        }
+      }
+
+      getReview();
+    },
+    [room]
+  );
 
   if (!room || isLoading) return <LoadingSpinner />;
 
@@ -120,12 +141,9 @@ function Page() {
         </div>
       </div>
 
-      {reviewIsValidating ||
-      reviewIsLoading ||
-      (roomReviews &&
-        roomReviews.length > 0 &&
-        !reviewIsValidating &&
-        !reviewIsLoading) ? (
+      {isReviewLoading ? (
+        <LoadingSpinner />
+      ) : (
         <div className="shadow dark:shadow-white rounded-lg p-6">
           <div className="items-center mb-4">
             <p className="md:text-2xl font-semibold text-secondary">
@@ -133,22 +151,19 @@ function Page() {
             </p>
           </div>
 
-          {!reviewIsLoading &&
-          !reviewIsValidating &&
-          roomReviews &&
-          roomReviews.length > 0 ? (
+          {roomReviews.current?.length !== 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <RoomReview
-                roomReviews={roomReviews!}
+                roomReviews={roomReviews.current!}
+                reviewIsLoading={isReviewLoading}
                 reviewError={reviewError}
-                reviewIsLoading={reviewIsLoading}
               />
             </div>
           ) : (
-            <LoadingSpinner />
+            <h1>Ulasan untuk kamar ini belum tersedia.</h1>
           )}
         </div>
-      ) : null}
+      )}
 
       <div className="md:hidden md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white top-10 h-fit overflow-hidden">
         <BookRoomCTA hargaDiskon={hargaDiskon} room={room} slug={slug} />

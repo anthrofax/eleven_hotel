@@ -12,9 +12,8 @@ function RoomReview({
   reviewError: any;
   reviewIsLoading: any;
 }) {
-  if (reviewError) throw new Error("Cannot fetch data");
-  if (typeof roomReviews === "undefined" && !reviewIsLoading)
-    throw new Error("Cannot fetch data");
+  if (reviewError) throw new Error(`Cannot fetch data: ${reviewError}`);
+
 
   return (
     <>

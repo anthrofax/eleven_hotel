@@ -225,7 +225,7 @@ export const createReview = async ({
   return data;
 };
 
-export async function getRoomReviews(roomId: string | undefined) {
+export async function getRoomReviews(roomId: string) {
   const result = await sanityClient.fetch<Ulasan[]>(
     queries.getRoomReviewsQuery,
     {
