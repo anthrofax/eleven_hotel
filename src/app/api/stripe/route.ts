@@ -16,6 +16,7 @@ type RequestData = {
   jumlahAnak: number;
   masaInap: number;
   slugKamar: string;
+  hargaLayananTambahan: number
 };
 
 export async function POST(req: Request, res: Response) {
@@ -26,6 +27,7 @@ export async function POST(req: Request, res: Response) {
     jumlahAnak,
     slugKamar,
     masaInap,
+    hargaLayananTambahan,
   }: RequestData = await req.json();
 
   const session = await getServerSession(authOptions);
@@ -33,7 +35,7 @@ export async function POST(req: Request, res: Response) {
   if (!session) {
     return new NextResponse("Authentication required", { status: 400 });
   }
-  
+
   if (
     !tanggalCheckin ||
     !tanggalCheckout ||
@@ -46,7 +48,6 @@ export async function POST(req: Request, res: Response) {
 
   const origin = req.headers.get("origin");
 
-
   const userId = session.user.id;
   const formattedCheckoutDate = tanggalCheckout.split("T")[0];
   const formattedCheckinDate = tanggalCheckin.split("T")[0];
@@ -54,7 +55,7 @@ export async function POST(req: Request, res: Response) {
   try {
     const room = await getRoom(slugKamar);
     const hargaDiskon = room.harga - (room.harga / 100) * room.diskon;
-    const hargaTotal = hargaDiskon * masaInap;
+    const hargaTotal = (hargaDiskon + hargaLayananTambahan) * masaInap;
 
     // Create a stripe payment
     const stripeSession = await stripe.checkout.sessions.create({

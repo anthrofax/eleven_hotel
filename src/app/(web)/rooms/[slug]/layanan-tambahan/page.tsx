@@ -12,13 +12,13 @@ import useSWR from "swr";
 
 function Page() {
   const { slug } = useParams();
-
   const {
     setBookingStage,
     bookingCart,
     dataJumlahOrangDewasa,
     checkinDate,
     checkoutDate,
+    setHargaLayananTambahan,
   } = useBookingContext();
   const router = useRouter();
 
@@ -33,6 +33,12 @@ function Page() {
       return toast.error(
         "Anda belum menambahkan layanan apapun. Silahkan tambahkan terlebih dahulu"
       );
+
+    const totalBiayaLayananTambahan = bookingCart.reduce((acc, curValue) => {
+      return acc + curValue.harga * curValue.qty;
+    }, 0);
+
+    setHargaLayananTambahan(totalBiayaLayananTambahan);
     setBookingStage("payment");
     router.push(`/rooms/${slug}`);
   }

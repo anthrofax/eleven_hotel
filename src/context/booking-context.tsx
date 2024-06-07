@@ -28,7 +28,7 @@ type BookingContextType = {
   setDataJumlahAnak: Dispatch<SetStateAction<number>>;
   hitungMasaInap: () => number;
   hitungMinimumTanggalCheckout: () => Date | null;
-  bookingKamar: (slugKamar: string) => void;
+bookingKamar: (slugKamar: string) => void;
   bookingStage: "booking" | "payment";
   setBookingStage: Dispatch<SetStateAction<"booking" | "payment">>;
   hargaLayananTambahan: number;
@@ -113,6 +113,7 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
         dataJumlahOrangDewasa,
         masaInap,
         slug,
+        hargaLayananTambahan
       });
 
       if (stripe) {

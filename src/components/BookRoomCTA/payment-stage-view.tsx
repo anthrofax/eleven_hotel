@@ -23,6 +23,7 @@ function PaymentStageView({
     dataJumlahOrangDewasa,
     bookingKamar,
     hitungMasaInap,
+    hargaLayananTambahan,
   } = useBookingContext();
 
   const { diskon, isBooked, harga } = room;
@@ -87,7 +88,9 @@ function PaymentStageView({
           <p>Harga Total </p>
           <h3>
             <span className={`font-thin  text-xl`}>
-              {Rupiah.format(hitungMasaInap() * hargaDiskon)}
+              {Rupiah.format(
+                hitungMasaInap() * (hargaDiskon + hargaLayananTambahan)
+              )}
             </span>
           </h3>
         </div>
