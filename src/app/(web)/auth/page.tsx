@@ -64,7 +64,7 @@ function Auth() {
   }
 
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto bg-[#FFC436] rounded-3xl">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-80 md:w-[70%] mx-auto">
         <div className="flex mb-8 flex-col md:flex-row items-center justify-between">
           <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl">
@@ -73,61 +73,70 @@ function Auth() {
           <p>OR</p>
           <span className="inline-flex items-center">
             <AiFillGithub
-              onClick={loginHandler}
-              className="mr-3 text-4xl cursor-pointer text-black dark:text-white"
+                onClick={loginHandler}
+                className="mr-3 text-4xl cursor-pointer text-black dark:text-white bg-white overflow-hidden rounded-full"
             />{" "}
             |
             <FcGoogle
-              onClick={loginHandler}
-              className="ml-3 text-4xl cursor-pointer"
+                onClick={loginHandler}
+                className="ml-3 text-4xl cursor-pointer bg-white rounded-full"
             />
           </span>
         </div>
 
         <form
-          action=""
-          className="space-y-4 md:space-y-6"
-          onSubmit={signUpSubmit}
+            action=""
+            className="space-y-4 md:space-y-6"
+            onSubmit={signUpSubmit}
         >
           <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="name@company.com"
-            required
-            className={inputStyles}
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              placeholder="name@company.com"
+              required
+              className={inputStyles}
           />
           <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="John Doe"
-            required
-            className={inputStyles}
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              placeholder="John Doe"
+              required
+              className={inputStyles}
           />
           <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="password"
-            required
-            minLength={6}
-            className={inputStyles}
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="password"
+              required
+              minLength={6}
+              className={inputStyles}
           />
-          <button
-            type="submit"
-            className="w-full bg-tertiary-dark focus:outline-none md:rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            Sign Up
-          </button>
+          <div className="flex flex-col gap-4">
+            <button
+                type="submit"
+                className="w-1/2 mx-auto bg-tertiary-dark text-white focus:outline-none md:rounded-full px-5 py-2.5 text-center"
+            >
+              Sign Up
+            </button>
 
-          <button onClick={loginHandler} className="text-blue-700 underline">
-            Login
-          </button>
+            <button onClick={loginHandler} className="">
+              <span>Already have an account? </span> <span className="text-blue-700 underline pointer">
+
+              Login
+            </span>
+            </button>
+          </div>
+
         </form>
+        <div className="absolute bottom-0 w-full">
+          <img src="menara.png" alt="Menara" className="w-full h-32 object-cover"/>
+        </div>
       </div>
     </section>
   );
