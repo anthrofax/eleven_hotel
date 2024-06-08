@@ -1,7 +1,7 @@
 import { defineField } from "sanity";
 
 const layananTambahan = {
-  name: "layanan-tambahan",
+  name: "layananTambahan",
   title: "Layanan Tambahan",
   type: "document",
   fields: [
@@ -23,6 +23,12 @@ const layananTambahan = {
       title: "Deskripsi",
       type: "text",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "oneQuantityService",
+      title: "Apakah layanan dapat memiliki lebih dari 1 kuantitas?",
+      type: "boolean",
+      initialValue: false,
     }),
     defineField({
       name: "gambar",

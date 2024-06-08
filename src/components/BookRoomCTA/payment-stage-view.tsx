@@ -1,4 +1,5 @@
 import { RiDiscountPercentFill } from "react-icons/ri";
+import { IoIosPricetag } from "react-icons/io";
 import { MdMan } from "react-icons/md";
 import { LuBaby } from "react-icons/lu";
 import { id } from "date-fns/locale/id";
@@ -23,7 +24,7 @@ function PaymentStageView({
     dataJumlahOrangDewasa,
     bookingKamar,
     hitungMasaInap,
-    hargaLayananTambahan,
+    totalBiayaLayananTambahan,
   } = useBookingContext();
 
   const { diskon, isBooked, harga } = room;
@@ -76,8 +77,20 @@ function PaymentStageView({
           <span className="font-bold text-xl">
             {" "}
             | Diskon {diskon}% saat ini,{" "}
+            <span className="text-green-500">
+              -{Rupiah.format((harga / 100) * diskon)}
+            </span>
+          </span>
+        </div>
+      )}
+
+      {totalBiayaLayananTambahan && (
+        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-lg">
+          <IoIosPricetag size={25} color="#0C356A" />
+          <span className="font-bold text-base">
+            | Total Biaya Layanan Tambahan, {" "}
             <span className="text-tertiary-dark">
-              {Rupiah.format((harga / 100) * diskon)}
+              +{Rupiah.format(totalBiayaLayananTambahan)}
             </span>
           </span>
         </div>
@@ -89,7 +102,7 @@ function PaymentStageView({
           <h3>
             <span className={`font-thin  text-xl`}>
               {Rupiah.format(
-                hitungMasaInap() * (hargaDiskon + hargaLayananTambahan)
+                hitungMasaInap() * (hargaDiskon + totalBiayaLayananTambahan)
               )}
             </span>
           </h3>

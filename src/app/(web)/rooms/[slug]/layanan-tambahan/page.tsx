@@ -18,7 +18,6 @@ function Page() {
     dataJumlahOrangDewasa,
     checkinDate,
     checkoutDate,
-    setHargaLayananTambahan,
   } = useBookingContext();
   const router = useRouter();
 
@@ -28,17 +27,14 @@ function Page() {
     isLoading,
   } = useSWR("/rooms/layanan-tambahan", getLayananTambahan);
 
+  console.log(layananTambahan)
+
   function handleNextStep() {
     if (bookingCart.length === 0)
       return toast.error(
         "Anda belum menambahkan layanan apapun. Silahkan tambahkan terlebih dahulu"
       );
 
-    const totalBiayaLayananTambahan = bookingCart.reduce((acc, curValue) => {
-      return acc + curValue.harga * curValue.qty;
-    }, 0);
-
-    setHargaLayananTambahan(totalBiayaLayananTambahan);
     setBookingStage("payment");
     router.push(`/rooms/${slug}`);
   }
@@ -70,6 +66,7 @@ function Page() {
               nama={layanan.nama}
               harga={layanan.harga}
               gambar={layanan.gambar}
+              oneQuantityService={layanan.oneQuantityService}
               key={layanan._id}
               _id={layanan._id}
             />

@@ -47,6 +47,7 @@ export async function createBooking({
   masaInap,
   hargaTotal,
   user,
+  bookingCart
 }: CreateBookingDto) {
   const mutation = {
     mutations: [
@@ -62,6 +63,7 @@ export async function createBooking({
           jumlahAnak,
           hargaTotal,
           diskon,
+          bookingCart,
         },
       },
     ],

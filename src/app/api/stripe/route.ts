@@ -4,6 +4,7 @@ import { authOptions } from "@/libs/auth";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { getRoom } from "@/libs/apis";
+import { CartItemType } from "@/models/cartItem";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2024-04-10",
@@ -12,22 +13,24 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 type RequestData = {
   checkinDate: string;
   checkoutDate: string;
-  jumlahOrangDewasa: number;
-  jumlahAnak: number;
+  dataJumlahOrangDewasa: number;
+  dataJumlahAnak: number;
   masaInap: number;
   slugKamar: string;
-  hargaLayananTambahan: number
+  bookingCart: CartItemType[];
+  totalBiayaLayananTambahan: number;
 };
 
 export async function POST(req: Request, res: Response) {
   const {
     checkinDate: tanggalCheckin,
-    jumlahOrangDewasa,
+    dataJumlahOrangDewasa,
     checkoutDate: tanggalCheckout,
-    jumlahAnak,
+    dataJumlahAnak,
     slugKamar,
     masaInap,
-    hargaLayananTambahan,
+    bookingCart,
+    totalBiayaLayananTambahan,
   }: RequestData = await req.json();
 
   const session = await getServerSession(authOptions);
@@ -39,9 +42,10 @@ export async function POST(req: Request, res: Response) {
   if (
     !tanggalCheckin ||
     !tanggalCheckout ||
-    !jumlahOrangDewasa ||
+    !dataJumlahOrangDewasa ||
     !slugKamar ||
-    !masaInap
+    !masaInap ||
+    !bookingCart
   ) {
     return new NextResponse("Please all fields are required", { status: 400 });
   }
@@ -55,7 +59,7 @@ export async function POST(req: Request, res: Response) {
   try {
     const room = await getRoom(slugKamar);
     const hargaDiskon = room.harga - (room.harga / 100) * room.diskon;
-    const hargaTotal = (hargaDiskon + hargaLayananTambahan) * masaInap;
+    const hargaTotal = (hargaDiskon + totalBiayaLayananTambahan) * masaInap;
 
     // Create a stripe payment
     const stripeSession = await stripe.checkout.sessions.create({
@@ -76,15 +80,16 @@ export async function POST(req: Request, res: Response) {
       payment_method_types: ["card"],
       success_url: `${origin}/users/${userId}`,
       metadata: {
-        jumlahOrangDewasa,
+        dataJumlahOrangDewasa,
         tanggalCheckin: formattedCheckinDate,
         tanggalCheckout: formattedCheckoutDate,
-        jumlahAnak,
+        dataJumlahAnak,
         diskon: room.diskon,
         kamarHotel: room._id,
         masaInap,
         hargaTotal,
         userId,
+        bookingCart: JSON.stringify(bookingCart),
       },
     });
 

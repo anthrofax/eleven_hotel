@@ -1,9 +1,10 @@
 type LayananTambahan = {
-    nama: string,
-    deskripsi: string,
-    harga: number,
-    gambar: string,
-    _id: string
-}
+  nama: string;
+  deskripsi: string;
+  harga: number;
+  gambar: string;
+  _id: string;
+  oneQuantityService: boolean;
+};
 
-export default LayananTambahan
+export default LayananTambahan;

@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 
 export async function POST(req: Request, res: Response) {
   const reqBody = await req.text();
-const sig = req.headers.get("stripe-signature");
+  const sig = req.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event: Stripe.Event;
@@ -41,6 +41,7 @@ const sig = req.headers.get("stripe-signature");
             masaInap,
             hargaTotal,
             userId,
+            bookingCart,
           },
         } = session;
 
@@ -57,7 +58,8 @@ const sig = req.headers.get("stripe-signature");
             masaInap: Number(masaInap),
             diskon: Number(diskon),
             hargaTotal: Number(hargaTotal),
-            user: userId,
+            user: userId, //Menambahkan Object Layanan Tambahan ke Web Hook
+            bookingCart: JSON.parse(bookingCart),
           });
 
           // Ubah status kamar menjadi telah dibooking

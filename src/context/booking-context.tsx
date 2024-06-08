@@ -1,21 +1,11 @@
 "use client";
 
-import { getRoom } from "@/libs/apis";
 import { getStripe } from "@/libs/stripe";
-import LayananTambahan from "@/models/layananTambahan";
-import { Room } from "@/models/room";
+import { CartItemType } from "@/models/cartItem";
 import axios from "axios";
-import { useParams } from "next/navigation";
 import React, { Dispatch, SetStateAction } from "react";
 import { createContext, useState, useContext } from "react";
 import toast from "react-hot-toast";
-import useSWR from "swr";
-
-type CartItemType = {
-  qty: number;
-  id: string,
-  harga: number
-}
 
 type BookingContextType = {
   checkinDate: Date | null;
@@ -28,13 +18,12 @@ type BookingContextType = {
   setDataJumlahAnak: Dispatch<SetStateAction<number>>;
   hitungMasaInap: () => number;
   hitungMinimumTanggalCheckout: () => Date | null;
-bookingKamar: (slugKamar: string) => void;
+  bookingKamar: (slugKamar: string) => void;
   bookingStage: "booking" | "payment";
   setBookingStage: Dispatch<SetStateAction<"booking" | "payment">>;
-  hargaLayananTambahan: number;
-  setHargaLayananTambahan: Dispatch<SetStateAction<number>>;
   bookingCart: CartItemType[];
   setBookingCart: Dispatch<SetStateAction<CartItemType[]>>;
+  totalBiayaLayananTambahan: number;
 };
 
 const BookingContext = createContext<BookingContextType>({
@@ -55,10 +44,9 @@ const BookingContext = createContext<BookingContextType>({
   bookingKamar: function () {},
   bookingStage: "booking",
   setBookingStage: function () {},
-  hargaLayananTambahan: 0,
-  setHargaLayananTambahan: function () {},
   bookingCart: [],
   setBookingCart: function () {},
+  totalBiayaLayananTambahan: 0,
 });
 
 function BookingContextProvider({ children }: { children: React.ReactNode }) {
@@ -69,9 +57,10 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
   const [bookingStage, setBookingStage] = useState<"booking" | "payment">(
     "booking"
   );
-  const [hargaLayananTambahan, setHargaLayananTambahan] = useState(0);
   const [bookingCart, setBookingCart] = useState<CartItemType[]>([]);
-
+  const totalBiayaLayananTambahan = bookingCart.reduce((acc, curValue) => {
+    return acc + curValue.layananTambahan.harga * curValue.qty;
+  }, 0);
 
   function hitungMasaInap(): number {
     if (!checkinDate || !checkoutDate) return 0;
@@ -112,8 +101,9 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
         dataJumlahAnak,
         dataJumlahOrangDewasa,
         masaInap,
-        slug,
-        hargaLayananTambahan
+        slugKamar: slug,
+        bookingCart,
+        totalBiayaLayananTambahan,
       });
 
       if (stripe) {
@@ -147,10 +137,9 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
         bookingKamar,
         bookingStage,
         setBookingStage,
-        hargaLayananTambahan,
-        setHargaLayananTambahan,
         bookingCart,
         setBookingCart,
+        totalBiayaLayananTambahan,
       }}
     >
       {children}

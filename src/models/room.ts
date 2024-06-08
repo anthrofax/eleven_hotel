@@ -1,3 +1,5 @@
+import { CartItemType } from "./cartItem";
+
 type CoverImage = {
   url: string;
 };
@@ -46,4 +48,5 @@ export type CreateBookingDto = {
   jumlahAnak: number;
   hargaTotal: number;
   diskon: number;
+  bookingCart: CartItemType[]
 };

@@ -80,9 +80,10 @@ export const getRoomReviewsQuery = groq`*[_type == "ulasan" && kamarHotel._ref =
     ratingPengguna
 }`;
 
-export const getLayananTambahan = groq`*[_type == "layanan-tambahan"] {
+export const getLayananTambahan = groq`*[_type == "layananTambahan"] {
     deskripsi,
     harga,
+    oneQuantityService,
     nama,
     "gambar": gambar.asset->url,
     _id

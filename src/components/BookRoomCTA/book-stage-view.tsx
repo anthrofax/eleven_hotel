@@ -3,9 +3,10 @@ import { LuBaby } from "react-icons/lu";
 import { FaCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useBookingContext } from "@/context/booking-context";
 import { Room } from "@/models/room";
+import { useSession } from "next-auth/react";
 
 function BookStageView({ room, slug }: { room: Room; slug: string }) {
   const {
@@ -22,6 +23,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
   } = useBookingContext();
 
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <>
@@ -129,6 +131,10 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
           className="booking-btn bg-secondary"
           disabled={room.isBooked}
           onClick={() => {
+            if (!session)
+              return toast.error(
+                "Anda belum login, silahkan login terlebih dahulu"
+              );
             if (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa)
               return toast.error("Mohon isi data booking terlebih dahulu");
 
@@ -140,6 +146,10 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
         <button
           disabled={room.isBooked}
           onClick={() => {
+            if (!session)
+              return toast.error(
+                "Anda belum login, silahkan login terlebih dahulu"
+              );
             if (!checkinDate || !checkoutDate || !dataJumlahOrangDewasa)
               return toast.error("Mohon isi data booking terlebih dahulu");
 

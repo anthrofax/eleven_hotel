@@ -61,6 +61,25 @@ const booking = {
       validation: (Rule) => Rule.min(0),
     }),
     defineField({
+      name: "keranjangLayananTambahan",
+      title: "Keranjang Layanan Tambahan",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "layananTambahan",
+              title: "Layanan Tambahan",
+              type: "reference",
+              to: { type: "layananTambahan" },
+            },
+            { name: "qty", title: "Kuantitas", type: "number" },
+          ],
+        },
+      ],
+    }),
+    defineField({
       name: "hargaTotal",
       title: "Harga Total",
       type: "number",

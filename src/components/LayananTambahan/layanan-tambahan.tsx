@@ -14,6 +14,7 @@ function LayananTambahan({
   harga,
   deskripsi,
   _id,
+  oneQuantityService,
 }: LayananTambahanType) {
   const {
     bookingCart,
@@ -23,7 +24,17 @@ function LayananTambahan({
     checkinDate,
     checkoutDate,
   } = useBookingContext();
-  const itemInCart = bookingCart.find((item) => item.id === _id);
+  const layananTambahan = {
+    nama,
+    gambar,
+    harga,
+    deskripsi,
+    _id,
+    oneQuantityService,
+  };
+  const itemInCart = bookingCart.find(
+    (item) => item.layananTambahan._id === _id
+  );
   const router = useRouter();
 
   // useEffect(
@@ -44,24 +55,29 @@ function LayananTambahan({
   //   [dataJumlahAnak, dataJumlahOrangDewasa, checkinDate, checkoutDate]
   // );
 
+  console.log(oneQuantityService);
+
   function handleIncItem() {
+    if (itemInCart)
+      if (itemInCart.qty <= 1 && !oneQuantityService) {
+        return toast.error("Layanan ini hanya dapat diisi dengan 1 kuantitas");
+      }
+
     setBookingCart((cart) => {
       if (!itemInCart) {
         return [
           ...cart,
           {
-            harga,
-            id: _id,
+            layananTambahan,
             qty: 1,
           },
         ];
       }
 
       return [
-        ...cart.filter((item) => item.id !== _id),
+        ...cart.filter((item) => item.layananTambahan._id !== _id),
         {
-          harga,
-          id: _id,
+          layananTambahan,
           qty: itemInCart.qty + 1,
         },
       ];
@@ -74,16 +90,15 @@ function LayananTambahan({
 
     setBookingCart((cart) => {
       if (itemInCart.qty === 1) {
-        return cart.filter((item) => item.id !== _id);
+        return cart.filter((item) => item.layananTambahan._id !== _id);
       }
 
       return [
         {
-          harga,
-          id: _id,
+          layananTambahan,
           qty: itemInCart.qty - 1,
         },
-        ...cart.filter((item) => item.id !== _id),
+        ...cart.filter((item) => item.layananTambahan._id !== _id),
       ];
     });
   }
@@ -115,7 +130,8 @@ function LayananTambahan({
                   <TiMinus className="group-hover:text-white transition-all" />
                 </button>
                 <span className="bg-primary text-white rounded-full py-1 px-3 flex items-center justify-center">
-                  {bookingCart.find((item) => item.id === _id)?.qty || 0}
+                  {bookingCart.find((item) => item.layananTambahan._id === _id)
+                    ?.qty || 0}
                 </span>
                 <button
                   className="aspect-auto w-[25%] transition-all hover:bg-primary/50 p-1 rounded-full group flex items-center justify-center"
@@ -127,7 +143,7 @@ function LayananTambahan({
             </div>
 
             <h3 className="text-lg font-bold text-end mt-3">
-              {` Total: ${Rupiah.format(itemInCart ? itemInCart?.harga * itemInCart?.qty : 0)}`}
+              {` Total: ${Rupiah.format(itemInCart ? itemInCart?.layananTambahan.harga * itemInCart?.qty : 0)}`}
             </h3>
           </div>
         </div>
