@@ -76,6 +76,7 @@ const Gallery = () => {
             <Image
               alt="gallery"
               src="/images/companies/astra.png"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
@@ -83,6 +84,7 @@ const Gallery = () => {
             <Image
               alt="gallery"
               src="/images/companies/btpn.png"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
@@ -90,6 +92,7 @@ const Gallery = () => {
             <Image
               alt="gallery"
               src="/images/companies/Jasamarga.png"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
@@ -97,6 +100,7 @@ const Gallery = () => {
             <Image
               alt="gallery"
               src="/images/companies/bri.png"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
@@ -104,6 +108,7 @@ const Gallery = () => {
             <Image
               alt="gallery"
               src="/images/companies/pertamina.png"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
@@ -111,6 +116,7 @@ const Gallery = () => {
             <Image
               alt="gallery"
               src="/images/companies/bumn.png"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
