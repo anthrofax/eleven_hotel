@@ -9,9 +9,8 @@ type Props = {
 
 function FeaturedRoom({ featuredRoom }: Props) {
   return (
-    <section className="px-20 items-center gap-12 container mx-auto">
-
-      <div className="container mx-auto">
+    <section className="items-center gap-12 container mx-auto p-5">
+      <div className="container mx-auto ">
         <div className="flex justify-between mt-12">
           <div className="flex gap-3 flex-col items-center justify-center">
             <p className="text-xs lg:text-xl text-center">Basic Room </p>
@@ -28,27 +27,22 @@ function FeaturedRoom({ featuredRoom }: Props) {
         </div>
       </div>
 
-      <div className="h-56 mt-20 gap-12 container mx-auto">
-        <div className="flex justify-between ">
-        <div className="basis-1/2 content-center items-stretch">
-            <Image
-              src="/images/hero-2.jpeg"
-              alt="Hero Image 2"
-              width={300}
-              height={300}
-              className="h-64 min-w-80 max-width-96 rounded-md"
-            />
+      <div className="h-fit mt-20 container mx-auto relative w-full">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-10">
+          <div className="h-64 w-[50%] rounded-md relative">
+            <Image src="/images/hero-2.jpeg" alt="Hero Image 2" fill />
           </div>
 
-          <div className="basis-1/2 content-center items-stretch">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur totam commodi, ullam eligendi et libero in quaerat beatae vitae, odio temporibus quos, veniam magnam doloremque qui ducimus omnis quae.</p>
-          </div>
-          
+          <p className="text-justify md:w-[50%] md:text-lg">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
+            aspernatur totam commodi, ullam eligendi et libero in quaerat beatae
+            vitae, odio temporibus quos, veniam magnam doloremque qui ducimus
+            omnis quae.
+          </p>
         </div>
       </div>
 
       <div className="bg-amber-400 rounded-2xl mt-20 flex md:flex-row flex-col px-4 py-10 items-center gap-5 container mx-auto">
-
         <div className="md:py-10 md:w-1/2 text-left mx-auto">
           <h3 className="font-heading mb-12">Featured Room</h3>
 
@@ -67,7 +61,6 @@ function FeaturedRoom({ featuredRoom }: Props) {
                 <p className="md:font-bold flex font-medium text-lg xl:text-5xl">
                   {featuredRoom.diskon} %
                 </p>
-
               </div>
             </div>
             <Link
@@ -79,18 +72,7 @@ function FeaturedRoom({ featuredRoom }: Props) {
           </div>
         </div>
 
-
-
-
         <div className="md:grid gap-8 grid-cols-1 mx-auto">
-
-
-
-
-
-
-
-
           <div className="rounded-2xl overflow-hidden h-96 mb-4 md:mb-0 ">
             <Image
               src={featuredRoom.coverGambar.url}
@@ -100,8 +82,6 @@ function FeaturedRoom({ featuredRoom }: Props) {
               className="img scale-animation"
             />
           </div>
-
-
 
           {/*
         <div className="grid grid-cols-2 gap-8 h-48">
@@ -118,11 +98,7 @@ function FeaturedRoom({ featuredRoom }: Props) {
           ))}
         </div>
           */}
-
-
         </div>
-
-
       </div>
     </section>
   );

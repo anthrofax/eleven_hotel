@@ -6,7 +6,6 @@ import PageSearch from "@/components/PageSearch/page-search";
 import { getFeaturedRoom } from "@/libs/apis";
 
 export default async function Home() {
-  const x = 8
   const featuredRoom = await getFeaturedRoom();
   
   return (

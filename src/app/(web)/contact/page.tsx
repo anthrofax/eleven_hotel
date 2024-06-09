@@ -5,11 +5,19 @@ import Image from "next/image";
 
 function Contact() {
   return (
-    <div className=" flex px-2 container mx-auto md:flex-nowrap justify-evenly dark:bg-black dark:text-white">
-      <div className="flex justify-between w-[80%] ">
-        <div className="left-side w-[45%] bg-amber-200 rounded-[15px] text-center">
+    <div className="flex container mx-auto md:flex-nowrap justify-center items-center dark:bg-black dark:text-white md:py-10">
+      <div className="flex flex-col md:flex-row md:justify-between w-[90%] relative gap-3 lg:gap-7 h-fit">
+        <div className="w-full h-52 md:h-72 relative block md:hidden">
+            <Image
+              src="/images/contact/Rectangle.png"
+              alt="Gambar hotel"
+              fill
+            />
+        </div>
+
+        <div className="left-side w-full max-md:h-[55%]  md:w-[45%] bg-amber-200 rounded-[15px] text-center py-10">
           <h1 className="text-center my-10 font-medium">Get In Touch</h1>
-          <form action="#">
+          <form action="https://formspree.io/f/mwkgjnpj" method="POST">
             <div className="name-form">
               <input
                 type="text"
@@ -22,7 +30,7 @@ function Contact() {
 
             <div className="email-form">
               <input
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 placeholder="Enter your email..."
@@ -45,14 +53,12 @@ function Contact() {
           </form>
         </div>
 
-        <div className="right-side w-[45%]   ">
-          <figure>
-            <img
+        <div className="right-side w-[55%] relative hidden md:block">
+            <Image
               src="/images/contact/Rectangle.png"
               alt="Gambar hotel"
-              className="w-full"
+              fill
             />
-          </figure>
         </div>
       </div>
     </div>
