@@ -71,11 +71,11 @@ export async function createBooking({
   console.log(mutation);
 
   const { data } = await axios.post(
-    `https://5x9vlanc.api.sanity.io/v2021-10-21/data/mutate/production`,
+    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     mutation,
     {
       headers: {
-        Authorization: `Bearer sksNCn7NhvvhhNm9vpvaMeg3g4yipp20J9vLVQwvzp7eQdkqINsNdOPrHx77AMLsvOgD4wTTORlXoO8tSu0ENeCvMYtGGBprceJl8qgkd9gIZF7m1WRHeacPKCqj914cSy4II523T3jggL1rAbThkEoHqTk59PcusQRW7mHMBpff4vCFfbZV`,
+        Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKENS}`,
       },
     }
   );
@@ -101,11 +101,11 @@ export const updateHotelRoom = async (hotelRoomId: string) => {
   };
 
   const { data } = await axios.post(
-    `https://5x9vlanc.api.sanity.io/v2021-10-21/data/mutate/production`,
+    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     mutation,
     {
       headers: {
-        Authorization: `Bearer sksNCn7NhvvhhNm9vpvaMeg3g4yipp20J9vLVQwvzp7eQdkqINsNdOPrHx77AMLsvOgD4wTTORlXoO8tSu0ENeCvMYtGGBprceJl8qgkd9gIZF7m1WRHeacPKCqj914cSy4II523T3jggL1rAbThkEoHqTk59PcusQRW7mHMBpff4vCFfbZV`,
+        Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKENS}`,
       },
     }
   );

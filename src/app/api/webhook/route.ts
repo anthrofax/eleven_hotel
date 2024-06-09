@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import LZString from "lz-string";
-
+import { v4 as uuidv4 } from 'uuid';
 import { createBooking, updateHotelRoom } from "@/libs/apis";
 import { CartItemType } from "@/models/cartItem";
 
@@ -73,6 +73,7 @@ export async function POST(req: Request, res: Response) {
                   _type: "reference",
                   _ref: item.layananTambahan._id,
                 },
+                _key: uuidv4()
               };
             }),
           });

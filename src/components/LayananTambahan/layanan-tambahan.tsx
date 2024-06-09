@@ -16,14 +16,7 @@ function LayananTambahan({
   _id,
   oneQuantityService,
 }: LayananTambahanType) {
-  const {
-    bookingCart,
-    setBookingCart,
-    dataJumlahAnak,
-    dataJumlahOrangDewasa,
-    checkinDate,
-    checkoutDate,
-  } = useBookingContext();
+  const { bookingCart, setBookingCart } = useBookingContext();
   const layananTambahan = {
     nama,
     gambar,
@@ -35,27 +28,6 @@ function LayananTambahan({
   const itemInCart = bookingCart.find(
     (item) => item.layananTambahan._id === _id
   );
-  const router = useRouter();
-
-  // useEffect(
-  //   function () {
-  //     if (
-  //       !dataJumlahAnak ||
-  //       !dataJumlahOrangDewasa ||
-  //       !checkinDate ||
-  //       !checkoutDate
-  //     ) {
-  //       router.back();
-  //     }
-  //     console.log(dataJumlahAnak)
-  //     console.log(dataJumlahOrangDewasa)
-  //     console.log(checkinDate)
-  //     console.log(checkoutDate)
-  //   },
-  //   [dataJumlahAnak, dataJumlahOrangDewasa, checkinDate, checkoutDate]
-  // );
-
-  console.log(oneQuantityService);
 
   function handleIncItem() {
     if (itemInCart)

@@ -27,7 +27,7 @@ function Page() {
     isLoading,
   } = useSWR("/rooms/layanan-tambahan", getLayananTambahan);
 
-  console.log(layananTambahan)
+  console.log(layananTambahan);
 
   function handleNextStep() {
     if (bookingCart.length === 0)
@@ -42,10 +42,11 @@ function Page() {
   useEffect(
     function () {
       if (!dataJumlahOrangDewasa || !checkinDate || !checkoutDate) {
-        router.back();
+        // toast.error('Mohon untuk mengisi data booking terlebih dahulu')
+        router.push(`/rooms/${slug}`);
       }
     },
-    [dataJumlahOrangDewasa, checkinDate, checkoutDate]
+    [dataJumlahOrangDewasa, checkinDate, checkoutDate, router, slug]
   );
 
   if (isLoading || !layananTambahan) return <LoadingSpinner />;
