@@ -75,44 +75,42 @@ const Gallery = () => {
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/astra.jpg"
-              className="h-40 aspect-square rounded-full relative"
+              src="/images/companies/astra.png"
               fill
             />
           </div>
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/btpn.jpeg"
-              className="h-40 aspect-square rounded-full relative"
+              src="/images/companies/btpn.png"
               fill
             />
           </div>
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/Ellipse 10.png"
+              src="/images/companies/Jasamarga.png"
               fill
             />
           </div>
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/Ellipse 11.png"
+              src="/images/companies/bri.png"
               fill
             />
           </div>
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/Ellipse 8.png"
+              src="/images/companies/pertamina.png"
               fill
             />
           </div>
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/Ellipse 11.png"
+              src="/images/companies/bumn.png"
               fill
             />
           </div>
