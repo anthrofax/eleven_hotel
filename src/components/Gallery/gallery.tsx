@@ -83,7 +83,8 @@ const Gallery = () => {
           <div className="h-40 aspect-square rounded-full relative">
             <Image
               alt="gallery"
-              src="/images/companies/Ellipse 9.png"
+              src="/images/companies/btpn.jpeg"
+              className="h-40 aspect-square rounded-full relative"
               fill
             />
           </div>
