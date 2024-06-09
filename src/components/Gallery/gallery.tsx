@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Gallery = () => {
   return (
-    <div className="px-20 mx-auto container py-14 h-full">
+    <div className=" mx-auto container py-14 h-full">
       <div className="flex flex-wrap">
         <div className="flex w-1/2 flex-wrap">
           <div className="w-1/2 p-1 md:p-2 h-48">
@@ -64,9 +64,9 @@ const Gallery = () => {
         </div>
       </div>
 
-      <div className="bg-amber-400 rounded-2xl mt-20 px-4 py-10 mx-auto">
+      <div className="bg-amber-400 rounded-2xl mt-20 px-4 py-10 mx-auto w-[80%]">
         <div className="mb-5">
-          <h1 className="text-center text-4xl font-semibold">
+          <h1 className="text-center text-2xl md:text-4xl font-semibold">
             Collaborating Companies
           </h1>
         </div>

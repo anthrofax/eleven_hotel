@@ -12,7 +12,6 @@ import MemberCardSliderButton from "@/components/AboutUs/MemberCardSliderButton/
 function MobileMemberCardSlider() {
   const memberIdList: string[] = [];
   memberData.forEach((_, key) => memberIdList.push(key));
-  console.log(memberIdList);
   const [memberListState, setMemberListState] = useState(memberIdList[0]);
 
   function handleSlideChange(swiper: any) {
@@ -43,7 +42,7 @@ function MobileMemberCardSlider() {
         {/* Tombol Slider */}
         <MemberCardSliderButton
           containerStyles="flex gap-2 absolute right-1/2 translate-x-1/2 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 justify-between xl:w-max xl:justify-none w-[95%]"
-          btnStyles="bg-tertiary-light hover:bg-primary text-primary hover:text-white rounded-full text-[22px] w-[44px] aspect-square flex justify-center items-center transition-all"
+          btnStyles="bg-tertiary-light dark:bg-tertiary-dark hover:bg-primary text-primary hover:text-white rounded-full text-[22px] w-[44px] aspect-square flex justify-center items-center transition-all"
         />
       </Swiper>
     </div>
