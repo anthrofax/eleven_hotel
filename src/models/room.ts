@@ -48,5 +48,11 @@ export type CreateBookingDto = {
   jumlahAnak: number;
   hargaTotal: number;
   diskon: number;
-  bookingCart: CartItemType[]
+  keranjangLayananTambahan: Array<{
+    qty: number;
+    layananTambahanId: {
+      _type: "reference";
+      _ref: string;
+    };
+  }>;
 };

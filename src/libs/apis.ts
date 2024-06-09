@@ -6,7 +6,6 @@ import { Booking } from "@/models/booking";
 import { CreateReviewDto, Ulasan, UpdateReviewDto } from "@/models/ulasan";
 import LayananTambahan from "@/models/layananTambahan";
 
-
 export async function getFeaturedRoom() {
   const result = await sanityClient.fetch<Room>(
     queries.getFeaturedRoomQuery,
@@ -47,7 +46,7 @@ export async function createBooking({
   masaInap,
   hargaTotal,
   user,
-  bookingCart
+  keranjangLayananTambahan,
 }: CreateBookingDto) {
   const mutation = {
     mutations: [
@@ -63,7 +62,7 @@ export async function createBooking({
           jumlahAnak,
           hargaTotal,
           diskon,
-          bookingCart,
+          keranjangLayananTambahan,
         },
       },
     ],
@@ -72,11 +71,11 @@ export async function createBooking({
   console.log(mutation);
 
   const { data } = await axios.post(
-    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    `https://5x9vlanc.api.sanity.io/v2021-10-21/data/mutate/production`,
     mutation,
     {
       headers: {
-        Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKENS}`,
+        Authorization: `Bearer sksNCn7NhvvhhNm9vpvaMeg3g4yipp20J9vLVQwvzp7eQdkqINsNdOPrHx77AMLsvOgD4wTTORlXoO8tSu0ENeCvMYtGGBprceJl8qgkd9gIZF7m1WRHeacPKCqj914cSy4II523T3jggL1rAbThkEoHqTk59PcusQRW7mHMBpff4vCFfbZV`,
       },
     }
   );
@@ -102,11 +101,11 @@ export const updateHotelRoom = async (hotelRoomId: string) => {
   };
 
   const { data } = await axios.post(
-    `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    `https://5x9vlanc.api.sanity.io/v2021-10-21/data/mutate/production`,
     mutation,
     {
       headers: {
-        Authorization: `Bearer ${process.env.SANITY_STUDIO_TOKENS}`,
+        Authorization: `Bearer sksNCn7NhvvhhNm9vpvaMeg3g4yipp20J9vLVQwvzp7eQdkqINsNdOPrHx77AMLsvOgD4wTTORlXoO8tSu0ENeCvMYtGGBprceJl8qgkd9gIZF7m1WRHeacPKCqj914cSy4II523T3jggL1rAbThkEoHqTk59PcusQRW7mHMBpff4vCFfbZV`,
       },
     }
   );
@@ -246,5 +245,5 @@ export async function getLayananTambahan() {
     { cache: "no-cache" }
   );
 
-  return result
+  return result;
 }

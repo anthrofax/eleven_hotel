@@ -78,6 +78,7 @@ const booking = {
           ],
         },
       ],
+      initialValue: [],
     }),
     defineField({
       name: "hargaTotal",

@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import LZString from "lz-string";
 
 import { createBooking, updateHotelRoom } from "@/libs/apis";
+import { CartItemType } from "@/models/cartItem";
 
 const checkout_session_completed = "checkout.session.completed";
 
@@ -32,42 +34,58 @@ export async function POST(req: Request, res: Response) {
         const {
           // @ts-ignore
           metadata: {
-            jumlahOrangDewasa,
+            dataJumlahOrangDewasa,
             tanggalCheckin,
             tanggalCheckout,
-            jumlahAnak,
+            dataJumlahAnak,
             diskon,
             kamarHotel,
             masaInap,
             hargaTotal,
             userId,
-            bookingCart,
+            compressedBookingCart,
           },
         } = session;
 
-        console.log(session);
+        console.log(session.metadata);
+        console.log(compressedBookingCart);
+        console.log(LZString.decompressFromUTF16(compressedBookingCart));
+        console.log(JSON.parse(LZString.decompressFromUTF16(compressedBookingCart)));
 
         //   Buat booking
         try {
           const result = await createBooking({
-            jumlahOrangDewasa: Number(jumlahOrangDewasa),
+            jumlahOrangDewasa: Number(dataJumlahOrangDewasa),
             tanggalCheckin,
             tanggalCheckout,
-            jumlahAnak: Number(jumlahAnak),
+            jumlahAnak: Number(dataJumlahAnak),
             kamarHotel,
             masaInap: Number(masaInap),
             diskon: Number(diskon),
             hargaTotal: Number(hargaTotal),
             user: userId, //Menambahkan Object Layanan Tambahan ke Web Hook
-            bookingCart: JSON.parse(bookingCart),
+            keranjangLayananTambahan: JSON.parse(
+              LZString.decompressFromUTF16(compressedBookingCart)
+            ).map((item: CartItemType) => {
+              return {
+                qty: item.qty,
+                layananTambahan: {
+                  _type: "reference",
+                  _ref: item.layananTambahan._id,
+                },
+              };
+            }),
           });
 
+          console.log("Berhasil mutate booking");
           // Ubah status kamar menjadi telah dibooking
           const updateResult = await updateHotelRoom(kamarHotel);
 
           console.log(result);
 
           console.log(updateResult);
+
+          console.log("Berhasil mutate update");
 
           return NextResponse.json("Booking successful", {
             status: 200,

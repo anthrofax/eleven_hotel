@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import LZString from "lz-string";
 
 import { authOptions } from "@/libs/auth";
 import { getServerSession } from "next-auth";
@@ -60,6 +61,9 @@ export async function POST(req: Request, res: Response) {
     const room = await getRoom(slugKamar);
     const hargaDiskon = room.harga - (room.harga / 100) * room.diskon;
     const hargaTotal = (hargaDiskon + totalBiayaLayananTambahan) * masaInap;
+    const compressedBookingCart = LZString.compressToUTF16(
+      JSON.stringify(bookingCart)
+    );
 
     // Create a stripe payment
     const stripeSession = await stripe.checkout.sessions.create({
@@ -89,7 +93,7 @@ export async function POST(req: Request, res: Response) {
         masaInap,
         hargaTotal,
         userId,
-        bookingCart: JSON.stringify(bookingCart),
+        compressedBookingCart,
       },
     });
 
