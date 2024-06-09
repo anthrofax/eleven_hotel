@@ -14,7 +14,7 @@ function RoomCard({ room }: Props) {
   if (!nama) return null;
 
   return (
-    <div className="rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black">
+    <div className="rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black dark:bg-black dark:text-white">
       <div className="h-60 overflow-hidden">
         <Image
           src={coverGambar?.url}
@@ -25,7 +25,7 @@ function RoomCard({ room }: Props) {
         />
       </div>
 
-      <div className="p-4 bg-white">
+      <div className="p-4">
         <div className="flex justify-between text-lg font-semibold">
           <p>{nama}</p>
           <p>{Rupiah.format(harga)}</p>

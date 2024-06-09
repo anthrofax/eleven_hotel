@@ -1,9 +1,9 @@
 import MemberCard from "./member-card";
-import MobileMemberCardSlider from "@/components/MobileMemberCardSlider/mobile-member-card-slider";
+import MobileMemberCardSlider from "@/components/AboutUs/MobileMemberCardSlider/mobile-member-card-slider";
 
 function MemberListPage() {
   return (
-    <section className="py-10 md:px-20 bg-white dark:bg-black1">
+    <section className="py-10 md:px-20 bg-white dark:bg-black dark:text-white">
       <h1 className="text-center font-medium text-2xl sm:text-3xl tracking-widest">
         OUR AWESOME MINDS
       </h1>
@@ -13,7 +13,7 @@ function MemberListPage() {
 
       <MobileMemberCardSlider />
 
-      <div className="hidden md:flex flex-col gap-20">
+      <div className="hidden lg:flex flex-col gap-20">
         <div className="flex flex-col sm:flex-row gap-20 justify-center items-center">
           <MemberCard memberId="alma" />
           <MemberCard memberId="gudang" />

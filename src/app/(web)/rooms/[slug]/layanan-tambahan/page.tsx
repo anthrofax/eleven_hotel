@@ -2,6 +2,7 @@
 
 import LoadingSpinner from "@/app/(web)/loading";
 import LayananTambahan from "@/components/LayananTambahan/layanan-tambahan";
+import LayananTambahanMobileSlider from "@/components/LayananTambahanMobileSlider/layanan-tambahan-mobile-slider";
 import { useBookingContext } from "@/context/booking-context";
 import { getLayananTambahan } from "@/libs/apis";
 import LayananTambahanType from "@/models/layananTambahan";
@@ -53,14 +54,16 @@ function Page() {
 
   return (
     <div className="py-3">
-      <div className="w-[90%] mx-auto container bg-tertiary-superLight p-5 rounded-xl">
+      <div className="w-[90%] mx-auto container bg-tertiary-superLight dark:bg-tertiary-light p-5 rounded-xl">
         <h1 className="text-center font-semibold text-2xl mb-3">
           Layanan Tambahan
         </h1>
 
         <hr className="border-2 border-secondary rounded-full mb-5 w-3/4 mx-auto" />
 
-        <div className="flex flex-col gap-5">
+        <LayananTambahanMobileSlider daftarLayananTambahan={layananTambahan}/>
+
+        <div className="min-[1280px]:flex flex-col gap-5 hidden">
           {layananTambahan.map((layanan: LayananTambahanType) => (
             <LayananTambahan
               deskripsi={layanan.deskripsi}

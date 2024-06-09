@@ -10,7 +10,7 @@ function SocialMedia({
   return (
     <a
       href={link}
-      className="transition-all text-black hover:text-tertiary-light  w-8 h-8 sm:w-10 sm:h-10 bg-tertiary-light hover:bg-black border border-black hover:border-tertiary-light flex items-center justify-center rounded-full"
+      className="transition-all text-black dark:text-white dark:hover:text-tertiary-dark hover:text-tertiary-light  w-8 h-8 sm:w-10 sm:h-10 bg-tertiary-light dark:bg-tertiary-dark dark:hover:bg-white hover:bg-black dark:hover:border-tertiary-dark border border-black dark:border-white hover:border-tertiary-light flex items-center justify-center rounded-full"
     >
       {type === "facebook" && (
         <svg

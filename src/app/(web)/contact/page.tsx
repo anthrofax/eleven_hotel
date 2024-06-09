@@ -15,7 +15,7 @@ function Contact() {
             />
         </div>
 
-        <div className="left-side w-full max-md:h-[55%]  md:w-[45%] bg-amber-200 rounded-[15px] text-center py-10">
+        <div className="left-side w-full max-md:h-[55%]  md:w-[45%] bg-tertiary-light rounded-[15px] text-center py-10">
           <h1 className="text-center my-10 font-medium">Get In Touch</h1>
           <form action="https://formspree.io/f/mwkgjnpj" method="POST">
             <div className="name-form">
@@ -47,7 +47,7 @@ function Contact() {
               ></textarea>
             </div>
 
-            <button className="mt-6 bg-amber-400 w-[85%] py-2 rounded-md">
+            <button className="mt-6 bg-tertiary-dark w-[85%] py-2 rounded-md">
               Submit
             </button>
           </form>

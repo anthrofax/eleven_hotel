@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function Description() {
   return (
-    <section className="bg-white  min-h-[500px] flex flex-col items-center justify-center text-center py-10 px-5">
+    <section className="bg-white dark:bg-black dark:text-white  min-h-[500px] flex flex-col items-center justify-center text-center py-10 px-5">
       <h1 className="text-center font-medium text-2xl sm:text-3xl tracking-widest">
         Tentang Perusahaan Kami
       </h1>

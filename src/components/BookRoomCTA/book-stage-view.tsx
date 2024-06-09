@@ -94,7 +94,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
               onChange={(e) => setDataJumlahOrangDewasa(+e.target.value)}
               min={1}
               max={5}
-              className="w-full border border-gray-300 rounded-lg p-2.5 bg-tertiary-superLight pl-8 "
+              className="w-full border border-gray-300 rounded-lg p-2.5 bg-tertiary-superLight pl-8 dark:text-black"
             />
           </div>
         </div>
@@ -120,7 +120,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
               onChange={(e) => setDataJumlahAnak(+e.target.value)}
               min={0}
               max={3}
-              className="w-full border border-gray-300 rounded-lg p-2.5 bg-tertiary-superLight pl-10 "
+              className="w-full border border-gray-300 rounded-lg p-2.5 bg-tertiary-superLight pl-10 dark:text-black"
             />
           </div>
         </div>
