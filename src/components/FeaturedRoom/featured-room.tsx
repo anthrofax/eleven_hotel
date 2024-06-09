@@ -34,10 +34,9 @@ function FeaturedRoom({ featuredRoom }: Props) {
           </div>
 
           <p className="text-justify md:w-[50%] md:text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-            aspernatur totam commodi, ullam eligendi et libero in quaerat beatae
-            vitae, odio temporibus quos, veniam magnam doloremque qui ducimus
-            omnis quae.
+          Kamar hotel kami menawarkan berbagai jenis akomodasi untuk memenuhi kebutuhan setiap tamu. 
+          Pilihan mulai dari Kamar Standard yang nyaman dengan fasilitas dasar, Kamar Deluxe yang lebih luas 
+          dengan tambahan fasilitas, hingga Suite mewah dengan ruang tamu terpisah dan fasilitas premium.
           </p>
         </div>
       </div>
