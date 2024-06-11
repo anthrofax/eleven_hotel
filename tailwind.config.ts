@@ -18,6 +18,8 @@ const config: Config = {
           light: "#FFC436",
           superLight: '#FFF0CE'
         },
+        black2: "#2E3239",
+        black3: "#2C2F32"
       },
       fontFamily: {
         poppins: ["var(--font-poppins)"],

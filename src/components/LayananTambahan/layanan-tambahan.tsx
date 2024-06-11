@@ -85,7 +85,11 @@ function LayananTambahan({
           <h3>{Rupiah.format(harga)}</h3>
         </div>
 
-        <div className="mt-5">{deskripsi}</div>
+        <div className="mt-5">
+          {" "}
+          {deskripsi.slice(0, 300)}
+          {deskripsi.length > 300 && "......"}
+        </div>
 
         <div className="flex mt-7 justify-end">
           <div className="bg-tertiary-superLight dark:bg-tertiary-light px-7 py-3 rounded-xl w-fit flex flex-col gap-1 dark:text-black">
@@ -99,7 +103,7 @@ function LayananTambahan({
                 >
                   <TiMinus className="group-hover:text-white transition-all text-white dark:text-black" />
                 </button>
-                <span className="bg-primary text-white rounded-full py-1 px-3 flex items-center justify-center">
+                <span className="bg-primary text-white rounded-full md:py-1 md:px-3 flex items-center justify-center">
                   {bookingCart.find((item) => item.layananTambahan._id === _id)
                     ?.qty || 0}
                 </span>

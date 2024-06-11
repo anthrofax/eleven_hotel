@@ -61,7 +61,7 @@ function RatingModal({
             value={ratingText}
             onChange={(e) => setRatingText(e.target.value)}
             rows={4}
-            className="w-full px-2 py-3 border rounded-md"
+            className="w-full px-2 py-3 border rounded-md dark:text-black"
           ></textarea>
         </div>
 

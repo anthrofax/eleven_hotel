@@ -46,7 +46,7 @@ function Page({ params }: { params: any }) {
         ratingValue,
         roomId,
       });
-      
+
       toast.success("Berhasil memberikan ulasan");
     } catch (error) {
       console.log(error);
@@ -90,13 +90,13 @@ function Page({ params }: { params: any }) {
   return (
     <div className="container mx-auto px-2 md:px-4 py10">
       <div className="grid md:grid-cols-12 gap-10">
-        <div className="hidden md:block md:col-span-4 lg:col-span-3 shadow-lg h-fit sticky top-10 bg-[#eff0f2] text-black rounded-lg px-6 py-4">
-          <div className="md:w-[143px] w-28 h-28 md:h-[143px] mx-auto mb-5 rounded-full overflow-hidden">
+        <div className="hidden md:block md:col-span-4 lg:col-span-3 shadow-lg dark:shadow-[0_10px_15px_-3px_rgba(255, 255, 255)] h-fit sticky top-10 bg-[#eff0f2] dark:bg-black3 text-black dark:text-white rounded-lg px-6 py-4">
+          <div className="md:w-[143px] w-28 h-28 md:h-[143px] mx-auto mb-5 rounded-full overflow-hidden relative">
             <Image
               src={userData.image}
               alt={userData.name}
-              width={143}
-              height={143}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="img scale-animation rounded-full"
             />
           </div>
@@ -144,10 +144,10 @@ function Page({ params }: { params: any }) {
             />
           </div>
 
-          <nav className="sticky top-0 px-2 w-fit mx-auto md:w-full md:px-5 py-3 mb-8 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 mt-7">
+          <nav className="sticky top-0 px-2 w-fit mx-auto md:w-full md:px-5 py-3 mb-8 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-black2 dark:border-black3 mt-7">
             <ol
               className={`${
-                currentNav === "bookings" ? "text-blue-600" : "text-gray-700"
+                currentNav === "bookings" ? "text-blue-600" : "text-gray-700 dark:text-white/50"
               } inline-flex mr-1 md:mr-5 items-center space-x-1 md:space-x-3`}
             >
               <li
@@ -162,7 +162,7 @@ function Page({ params }: { params: any }) {
             </ol>
             <ol
               className={`${
-                currentNav === "amount" ? "text-blue-600" : "text-gray-700"
+                currentNav === "amount" ? "text-blue-600" : "text-gray-700 dark:text-white/50"
               } inline-flex mr-1 md:mr-5 items-center space-x-1 md:space-x-3`}
             >
               <li

@@ -65,7 +65,7 @@ function Auth() {
   }
 
   return (
-    <section className="container mx-auto bg-[#FFC436] rounded-3xl overflow-hidden relative w-[80%] md:w-full">
+    <section className="container mx-auto bg-[#FFC436] rounded-3xl overflow-hidden relative w-[80%]">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-80 md:w-[70%] mx-auto">
         <div className="flex mb-8 flex-col md:flex-row items-center justify-between z-10">
           <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl">
@@ -75,7 +75,7 @@ function Auth() {
           <span className="inline-flex items-center">
             <AiFillGithub
               onClick={loginHandler}
-              className="mr-3 text-4xl cursor-pointer text-black dark:text-white bg-white overflow-hidden rounded-full"
+              className="mr-3 text-4xl cursor-pointer text-black dark:text-white bg-white dark:bg-black2 overflow-hidden rounded-full"
             />{" "}
             |
             <FcGoogle

@@ -16,9 +16,9 @@ function Table({
 
 
   return (
-    <div className="overflow-x-auto max-w-[340px] rounded-lg mx-auto md:max-w-full shadow-md sm:rounded-lg">
+    <div className="overflow-x-auto max-w-[340px] rounded-lg mx-auto md:max-w-full shadow-md dark:shadow-[white/30] sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <thead className="text-xs text-gray-700 dark:text-white/80 uppercase bg-gray-50 dark:bg-black2">
           <tr>
             <th className="px-6 py-3">Room name</th>
             <th className="px-6 py-3">Unit Price</th>
@@ -33,7 +33,7 @@ function Table({
           {bookingDetails.map((booking) => (
             <tr
               key={booking._id}
-              className="bg-white border-b hover:bg-gray-50"
+              className="bg-white dark:bg-black dark:text-white border-b hover:bg-gray-50 dark:hover:bg-black2"
             >
               <th
                 onClick={() =>

@@ -4,6 +4,7 @@ import LoadingSpinner from "@/app/(web)/loading";
 import LayananTambahan from "@/components/LayananTambahan/layanan-tambahan";
 import LayananTambahanMobileSlider from "@/components/LayananTambahanMobileSlider/layanan-tambahan-mobile-slider";
 import { useBookingContext } from "@/context/booking-context";
+import { Rupiah } from "@/helper/formatCurrency";
 import { getLayananTambahan } from "@/libs/apis";
 import LayananTambahanType from "@/models/layananTambahan";
 import { useParams, useRouter } from "next/navigation";
@@ -28,8 +29,6 @@ function Page() {
     isLoading,
   } = useSWR("/rooms/layanan-tambahan", getLayananTambahan);
 
-  console.log(layananTambahan);
-
   function handleNextStep() {
     if (bookingCart.length === 0)
       return toast.error(
@@ -53,15 +52,15 @@ function Page() {
   if (isLoading || !layananTambahan) return <LoadingSpinner />;
 
   return (
-    <div className="py-3">
-      <div className="w-[90%] mx-auto container bg-tertiary-superLight dark:bg-tertiary-light p-5 rounded-xl">
+    <div className="py-3 relative">
+      <div className="w-[90%] mx-auto container bg-tertiary-superLight dark:bg-tertiary-light py-5 md:p-5 rounded-xl">
         <h1 className="text-center font-semibold text-2xl mb-3">
           Layanan Tambahan
         </h1>
 
         <hr className="border-2 border-secondary rounded-full mb-5 w-3/4 mx-auto" />
 
-        <LayananTambahanMobileSlider daftarLayananTambahan={layananTambahan}/>
+        <LayananTambahanMobileSlider daftarLayananTambahan={layananTambahan} />
 
         <div className="min-[1280px]:flex flex-col gap-5 hidden">
           {layananTambahan.map((layanan: LayananTambahanType) => (
@@ -85,6 +84,21 @@ function Page() {
           </button>
         </div>
       </div>
+
+      {bookingCart.length > 0 && (
+        <div className="fixed bg-tertiary-superLight dark:bg-tertiary-light text-black left-0 right-0 bottom-0 h-16 rounded-t-xl flex justify-between items-center px-5 text-lg">
+          <h3>Total Item: {bookingCart.length}</h3>
+
+          <h3 className="font-semibold">
+            Total Harga:{" "}
+            {Rupiah.format(
+              bookingCart.reduce((acc, curValue) => {
+                return acc + curValue.layananTambahan.harga * curValue.qty;
+              }, 0)
+            )}
+          </h3>
+        </div>
+      )}
     </div>
   );
 }

@@ -94,18 +94,18 @@ function LayananTambahanMobileSlider({
   }
 
   return (
-    <div className="w-full max-w-[30rem] container mx-auto  min-[1280px]:hidden flex justify-center items-center ">
+    <div className="w-full container mx-auto min-[1280px]:hidden flex justify-center items-center relative">
       <Swiper
         spaceBetween={30}
         slidesPerView={1}
-        className="xl:h-[520px] mb-12 relative"
+        className="xl:h-[520px] mb-12 static w-[90%] max-w-[28rem]"
         onSlideChange={handleSlideChange}
       >
         {daftarLayananTambahan.map((_, index) => {
           return (
             <SwiperSlide key={index}>
-              <div className="h-fit relative flex justify-center items-center transition-all cursor-pointer">
-                <div className="w-[70%] bg-tertiary-light dark:bg-tertiary-dark h-full text-black dark:text-white rounded-lg pb-3">
+              <div className="h-fit  flex justify-center items-center transition-all cursor-pointer">
+                <div className="w-[85%] max-w-[17rem] bg-tertiary-light dark:bg-tertiary-dark h-full text-black dark:text-white rounded-lg pb-3">
                   <div className="relative bg-white h-[16rem] overflow-hidden rounded-t-lg">
                     <Image
                       src={curLayananTambahan.gambar}
@@ -116,7 +116,9 @@ function LayananTambahanMobileSlider({
                   </div>
 
                   <div className="text-center flex flex-col items-center justify-center gap-3 mt-3">
-                    <h1 className="text-xl font-semibold">{curLayananTambahan.nama}</h1>
+                    <h1 className="text-xl font-semibold">
+                      {curLayananTambahan.nama}
+                    </h1>
                     <p className="w-[80%] text-justify">
                       {curLayananTambahan.deskripsi.slice(0, 100)}{" "}
                       {curLayananTambahan.deskripsi.length > 100 && "..."}
@@ -129,7 +131,7 @@ function LayananTambahanMobileSlider({
                     </h3>
 
                     <div className="col-span-1">
-                      <div className="flex gap-1 bg-tertiary-dark dark:bg-tertiary-light py-1 px-2 rounded-lg items-center">
+                      <div className="flex gap-1 bg-tertiary-dark dark:bg-tertiary-light py-1 px-0.5 rounded-lg items-center justify-center">
                         <button
                           className="aspect-auto w-[25%] transition-all hover:bg-primary/50 rounded-full group flex items-center justify-center"
                           onClick={handleDecItem}
@@ -170,8 +172,8 @@ function LayananTambahanMobileSlider({
         })}
 
         <LayananTambahanSliderButton
-          containerStyles="flex gap-2 absolute right-1/2 translate-x-1/2 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 justify-between xl:w-max xl:justify-none w-full px-1/2"
-          btnStyles="bg-tertiary-light dark:bg-tertiary-dark hover:bg-primary text-primary dark:text-white hover:text-white rounded-full text-[22px] w-[44px] aspect-square flex justify-center items-center transition-all"
+          containerStyles="flex gap-2 absolute right-1/2 translate-x-1/2 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 justify-between xl:w-max xl:justify-none w-[95%] min-[460px]:w-[90%] px-1/2 "
+          btnStyles="bg-tertiary-light dark:bg-tertiary-dark hover:bg-primary text-primary dark:text-white hover:text-white rounded-full text-[22px] w-[44px] aspect-square flex justify-center items-center transition-all opacity-50 hover:opacity-100"
         />
       </Swiper>
     </div>

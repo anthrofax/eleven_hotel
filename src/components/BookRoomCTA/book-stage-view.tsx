@@ -33,7 +33,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
         <div className="w-1/2 pr-2 ">
           <label
             htmlFor="check-in-date"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400 mb-3"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-50 mb-3"
           >
             <p>Check-in</p>
             <p>DD/MM/YYYY</p>
@@ -52,7 +52,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
         <div className="w-1/2 pl-2 ">
           <label
             htmlFor="check-out-date"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400 mb-3"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-50 mb-3"
           >
             <p>Check-out</p>
             <p>DD/MM/YYYY</p>
@@ -75,7 +75,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
         <div className="w-full">
           <label
             htmlFor="adults"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-50"
           >
             Dewasa
           </label>
@@ -101,7 +101,7 @@ function BookStageView({ room, slug }: { room: Room; slug: string }) {
         <div className="w-full">
           <label
             htmlFor="children"
-            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-50"
           >
             Jumlah Anak
           </label>
