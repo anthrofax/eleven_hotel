@@ -16,7 +16,7 @@ function Contact() {
         </div>
 
         <div className="left-side w-full max-md:h-[55%]  md:w-[45%] bg-tertiary-light rounded-[15px] text-center py-10">
-          <h1 className="text-center my-10 font-medium">Get In Touch</h1>
+          <h1 className="text-center mt-5 mb-10 font-medium text-lg md:text-xl lg:text-2xl">Get In Touch</h1>
           <form action="https://formspree.io/f/mwkgjnpj" method="POST">
             <div className="name-form">
               <input
@@ -24,7 +24,7 @@ function Contact() {
                 name="name"
                 id="name"
                 placeholder="Enter your name..."
-                className="w-[85%] px-4 py-2 rounded-md focus:outline-none focus:bg-slate-50 mb-8"
+                className="w-[85%] px-4 py-2 rounded-md focus:outline-none focus:bg-slate-50 mb-8 text-black"
               />
             </div>
 
@@ -34,7 +34,7 @@ function Contact() {
                 name="email"
                 id="email"
                 placeholder="Enter your email..."
-                className="w-[85%] px-4 py-2 rounded-md focus:outline-none focus:bg-slate-50 mb-8"
+                className="w-[85%] px-4 py-2 rounded-md focus:outline-none focus:bg-slate-50 mb-8 text-black"
               />
             </div>
 
