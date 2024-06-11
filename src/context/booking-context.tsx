@@ -107,7 +107,6 @@ function BookingContextProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (stripe) {
-        toast.success('Anda berhasil melakukan booking')
         const result = await stripe.redirectToCheckout({
           sessionId: stripeSession.id,
         });

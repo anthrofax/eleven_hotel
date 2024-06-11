@@ -55,7 +55,7 @@ function BookRoomCTA({
           <IoChevronBackCircle
             size={50}
             color="#0C356A"
-            className="absolute left-3 top-2 hover:scale-105 duration-300 transition-all cursor-pointer"
+            className="absolute left-3 top-2 hover:scale-105 duration-300 transition-all cursor-pointer opacity-45 hover:opacity-100"
             onClick={() => setBookingStage("booking")}
           />
 

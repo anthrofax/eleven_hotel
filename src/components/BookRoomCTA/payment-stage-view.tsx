@@ -47,22 +47,22 @@ function PaymentStageView({
       ) : null}
 
       <div className="flex gap-1">
-        <MdMan size={20} color="#0C356A" />{" "}
+        <MdMan className="text-xl md:text-2xl" color="#0C356A" />{" "}
         <span>{dataJumlahOrangDewasa} Orang Dewasa</span>
       </div>
 
       {dataJumlahAnak > 0 && (
         <div className="flex gap-1 mt-3">
-          <LuBaby size={20} color="#0C356A" />{" "}
+          <LuBaby className="text-xl md:text-2xl" color="#0C356A" />{" "}
           <span>{dataJumlahAnak} Anak Kecil</span>
         </div>
       )}
 
       {hitungMasaInap() > 0 ? (
-        <div className="bg-primary rounded-full w-full mt-5 py-2 px-5 flex justify-between text-white items-center text-lg">
-          <p>Harga </p>
+        <div className="bg-primary rounded-xl lg:rounded-full w-full mt-5 py-2 px-5 gap-3 flex justify-between text-white items-center text-base lg:text-lg">
+          <p>Harga</p>
           <h3>
-            <span className={`font-thin  text-xl`}>
+            <span className={`font-thin`}>
               {Rupiah.format(hitungMasaInap() * harga)}
             </span>
           </h3>
@@ -72,11 +72,14 @@ function PaymentStageView({
       )}
 
       {diskon > 0 && (
-        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-lg">
-          <RiDiscountPercentFill size={25} color="#0C356A" />
-          <span className="font-bold text-xl">
+        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-base lg:text-lg gap-3">
+          <RiDiscountPercentFill
+            className="text-5xl lg:text-3xl"
+            color="#0C356A"
+          />
+          <span className="font-bold ">
             {" "}
-            | Diskon {diskon}% saat ini,{" "}
+            Diskon {diskon}% saat ini,{" "}
             <span className="text-green-500">
               -{Rupiah.format((harga / 100) * diskon)}
             </span>
@@ -85,10 +88,10 @@ function PaymentStageView({
       )}
 
       {totalBiayaLayananTambahan && (
-        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-lg">
-          <IoIosPricetag size={25} color="#0C356A" />
-          <span className="font-bold text-base">
-            | Total Biaya Layanan Tambahan, {" "}
+        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-base lg:text-lg gap-3 text-end">
+          <IoIosPricetag className="text-5xl lg:text-3xl" color="#0C356A" />
+          <span className="font-bold">
+            Total Biaya Layanan Tambahan,{" "}
             <span className="text-tertiary-dark">
               +{Rupiah.format(totalBiayaLayananTambahan)}
             </span>
@@ -97,10 +100,10 @@ function PaymentStageView({
       )}
 
       {hitungMasaInap() > 0 && (
-        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-lg">
+        <div className="bg-tertiary-superLight rounded-full w-full mt-5 py-2 px-5 flex justify-between text-black items-center text-base lg:text-lg gap-3">
           <p>Harga Total </p>
           <h3>
-            <span className={`font-thin  text-xl`}>
+            <span className={`font-thin`}>
               {Rupiah.format(
                 hitungMasaInap() * (hargaDiskon + totalBiayaLayananTambahan)
               )}
