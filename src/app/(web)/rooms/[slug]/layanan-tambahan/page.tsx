@@ -86,10 +86,10 @@ function Page() {
       </div>
 
       {bookingCart.length > 0 && (
-        <div className="fixed bg-tertiary-superLight dark:bg-tertiary-light text-black left-0 right-0 bottom-0 h-16 rounded-t-xl flex justify-between items-center px-5 text-lg">
+        <div className="fixed bg-tertiary-superLight dark:bg-tertiary-light text-black left-0 right-0 bottom-0 h-16 rounded-t-xl flex justify-between items-center px-5 text-lg z-20">
           <h3>Total Item: {bookingCart.length}</h3>
 
-          <h3 className="font-semibold">
+          <h3 className="font-semibold text-end">
             Total Harga:{" "}
             {Rupiah.format(
               bookingCart.reduce((acc, curValue) => {
