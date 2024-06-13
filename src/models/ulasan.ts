@@ -13,7 +13,7 @@ export type CreateReviewDto = {
 
 export type Ulasan = {
   teks: string;
-  user: { name: string };
+  user:any;
   ratingPengguna: number;
   _createdAt: Date;
   _id: string;

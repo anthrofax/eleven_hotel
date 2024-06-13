@@ -74,10 +74,8 @@ export const getRoomReviewsQuery = groq`*[_type == "ulasan" && kamarHotel._ref =
     _createdAt,
     _id,
     teks,
-    user -> {
-        name
-    },
-    ratingPengguna
+    ratingPengguna,
+    user
 }`;
 
 export const getLayananTambahan = groq`*[_type == "layananTambahan"] {

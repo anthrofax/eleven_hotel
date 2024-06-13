@@ -14,7 +14,6 @@ function RoomReview({
 }) {
   if (reviewError) throw new Error(`Cannot fetch data: ${reviewError}`);
 
-
   return (
     <>
       {roomReviews &&
@@ -24,7 +23,7 @@ function RoomReview({
             key={review._id}
           >
             <div className="font-semibold mb-2 flex">
-              <p>{review.user.name}</p>
+              <p>{review.user?._ref}</p>
               <div className="ml-4 flex items-center text-tertiary-light text-lg">
                 <Rating rating={review.ratingPengguna} />
               </div>
