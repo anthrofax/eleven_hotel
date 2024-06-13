@@ -7,6 +7,7 @@ const nextConfig = {
       "plus.unsplash.com",
       "lh3.googleusercontent.com",
       "cdn.sanity.io",
+      "cdn.pixabay.com"
     ],
   },
 };

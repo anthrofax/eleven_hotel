@@ -16,6 +16,27 @@ import Chart from "@/components/Chart/chart";
 import RatingModal from "@/components/RatingModal/rating-modal";
 import Backdrop from "@/components/BackDrop/backdrop";
 import toast from "react-hot-toast";
+import { confirmAlert } from "react-confirm-alert";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import ConfirmationBox from "@/components/ConfirmationBox/confirmation-box";
+
+const confirmationBoxOptionObj = {
+  customUI: ({ onClose }: { onClose: () => void }) => {
+    return (
+      <ConfirmationBox
+        icon={<RiLogoutCircleRLine />}
+        judul="Konfirmasi Logout"
+        pesan="Apakah anda yakin ingin melakukan logout?"
+        onClose={onClose}
+        onClickIya={() => {
+          signOut({ callbackUrl: "/" });
+          toast.success("Anda berhasil logout");
+        }}
+      />
+    );
+  },
+};
 
 function Page({ params }: { params: any }) {
   const { userId } = params;
@@ -102,7 +123,9 @@ function Page({ params }: { params: any }) {
           </div>
           <div className="font-normal py-4 text-left">
             <h6 className="text-xl font-bold pb-3">About</h6>
-            <p className="text-sm">{userData.tentang ?? ""}</p>
+            <p className="text-sm">
+              {userData.tentang ?? "Kamu belum mengatur deskripsi"}
+            </p>
           </div>
           <div className="font-normal text-left">
             <h6 className="text-xl font-bold pb-3">{userData.name}</h6>
@@ -111,7 +134,7 @@ function Page({ params }: { params: any }) {
             <p className="mr-2">Sign Out</p>
             <FaSignOutAlt
               className="text-3xl cursor-pointer"
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() => confirmAlert(confirmationBoxOptionObj)}
             />
           </div>
         </div>
@@ -140,14 +163,16 @@ function Page({ params }: { params: any }) {
             <p className="mr-2">Sign out</p>
             <FaSignOutAlt
               className="text-3xl cursor-pointer"
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() => confirmAlert(confirmationBoxOptionObj)}
             />
           </div>
 
           <nav className="sticky top-0 px-2 w-fit mx-auto md:w-full md:px-5 py-3 mb-8 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-black2 dark:border-black3 mt-7">
             <ol
               className={`${
-                currentNav === "bookings" ? "text-blue-600" : "text-gray-700 dark:text-white/50"
+                currentNav === "bookings"
+                  ? "text-blue-600"
+                  : "text-gray-700 dark:text-white/50"
               } inline-flex mr-1 md:mr-5 items-center space-x-1 md:space-x-3`}
             >
               <li
@@ -162,7 +187,9 @@ function Page({ params }: { params: any }) {
             </ol>
             <ol
               className={`${
-                currentNav === "amount" ? "text-blue-600" : "text-gray-700 dark:text-white/50"
+                currentNav === "amount"
+                  ? "text-blue-600"
+                  : "text-gray-700 dark:text-white/50"
               } inline-flex mr-1 md:mr-5 items-center space-x-1 md:space-x-3`}
             >
               <li
