@@ -14,6 +14,8 @@ function RoomReview({
 }) {
   if (reviewError) throw new Error(`Cannot fetch data: ${reviewError}`);
 
+  console.log(roomReviews);
+
   return (
     <>
       {roomReviews &&

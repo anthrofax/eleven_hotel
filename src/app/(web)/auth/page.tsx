@@ -15,14 +15,6 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { useForm } from "react-hook-form";
 
-const defaultFormData = {
-  email: "",
-  name: "",
-  password: "",
-  image:
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-};
-
 function Auth() {
   const {
     register,
@@ -56,7 +48,7 @@ function Auth() {
   async function signUpSubmit(data: any) {
     try {
       // Invoke POST request to api/sanity/signUp route.
-      const user = await signUp(data);
+      const user = await signUp({...data, image: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"});
 
       loginHandler();
       if (user) toast.success("Akun anda berhasil didaftarkan.");
@@ -67,22 +59,6 @@ function Auth() {
       reset;
     }
   }
-
-  const confirmationBoxOptionObj = {
-    customUI: ({ onClose }: { onClose: () => void }) => {
-      return (
-        <ConfirmationBox
-          icon={<GoInfo />}
-          judul="Konfirmasi Data"
-          pesan="Apakah data yang anda masukkan sudah benar?"
-          onClose={onClose}
-          onClickIya={signUpSubmit}
-          labelIya="Sudah"
-          labelTidak="Oh iya, belum"
-        />
-      );
-    },
-  };
 
   return (
     <section className="container mx-auto bg-[#FFC436] rounded-3xl overflow-hidden relative w-[80%]">
@@ -109,7 +85,23 @@ function Auth() {
           action=""
           className="space-y-4 md:space-y-6 z-10 relative"
           method="POST"
-          onSubmit={handleSubmit(() => confirmAlert(confirmationBoxOptionObj))}
+          onSubmit={handleSubmit((data) => {
+            confirmAlert({
+              customUI: ({ onClose }: { onClose: () => void }) => {
+                return (
+                  <ConfirmationBox
+                    icon={<GoInfo />}
+                    judul="Konfirmasi Data"
+                    pesan="Apakah data yang anda masukkan sudah benar?"
+                    onClose={onClose}
+                    onClickIya={() => signUpSubmit(data)}
+                    labelIya="Sudah"
+                    labelTidak="Oh iya, belum"
+                  />
+                );
+              },
+            });
+          })}
         >
           <div className="flex flex-col gap-3">
             <input
